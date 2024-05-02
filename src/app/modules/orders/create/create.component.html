@@ -1,0 +1,128 @@
+<div class="card">
+    <div class="card-body">
+        <h6 class="card-title display-4 text-uppercase text-black mb-4">Crear nueva orden</h6>
+        <h2 class="card-subtitle font-secondary text-primary mb-4">Complete los datos:</h2>
+        <form [formGroup]="createForm">
+            <div class="row">
+                <div class="col">
+                    <div class="mb-2">
+                        <label for="client" class="form-label">Cliente:</label>
+                        <select id="client" class="form-select" formControlName="clientId"
+                            aria-label="Multiple select example">
+                            <option selected disabled>Seleccione el cliente</option>
+                            <option *ngFor="let client of clients" [value]="client.id">{{client.name}}
+                                {{client.surname}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="mb-3">
+                        <label for="date" class="form-label">Fecha:</label>
+                        <input type="date" formControlName="date" class="form-control" id="date" name="date" required>
+                    </div>
+                </div>
+            </div>
+            <h2 class="card-subtitle font-secondary text-primary mb-4">Productos:</h2>
+
+            <ul class="list-group list-group-numbered" *ngIf="selectedProducts.length < 1">
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div class="ms-2 me-auto">
+                        <div class="fw-bold">Sin productos</div>
+                        No se han agregado productos a la orden
+                    </div>
+                    <button type="submit" class="btn btn-primary"
+                    data-bs-toggle="modal" data-bs-target="#addProduct">
+                        <i class="fas fa-plus"></i> Agregar producto(s)
+                    </button>
+                </li>
+            </ul>
+            <ol class="list-group list-group-numbered" *ngIf="selectedProducts.length > 0">
+                <li class="list-group-item d-flex justify-content-between align-items-start"
+                *ngFor="let product of selectedProducts">
+                    <div class="ms-2 me-auto">
+                        <div class="fw-bold">{{product.name}}</div>
+                        {{product.description}}
+                    </div>
+                    <span class="badge bg-primary rounded-pill">{{product.count}}</span>
+                </li>
+            </ol>
+<br/>
+            <h2 class="card-subtitle font-secondary text-primary mb-4">Envío:</h2>
+            <div class="row">
+                <div class="col">
+                    <div class="mb-3">
+                        <label for="shipAddress" class="form-label">Dirección de entrega</label>
+                        <textarea formControlName="shipAddress" class="form-control" id="shipAddress" rows="2"></textarea>
+                      </div>
+                </div>
+                <div class="col">
+                    <div class="mb-2">
+                        <br/>
+                        <br/>
+                        <select formControlName="shipMethod" class="form-select" aria-label="Default select example">
+                            <option selected>Seleccione método de envío</option>
+                            <option value="guatex">Guatex</option>
+                            <option value="cargoexpreso">Cargo Expreso</option>
+                            <option value="forza">Forza</option>
+                            <option value="repartidor">Motorista repartidor</option>
+                          </select>
+                      </div>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="shipAddress" class="form-label">Notas de envío:</label>
+                <textarea formControlName="notes" class="form-control" id="shipAddress" rows="2"></textarea>
+              </div>
+
+            <br/>
+            
+            <button type="submit" class="btn btn-primary" [disabled]="!createForm.valid && products.length <1" (click)="saveOrder()">
+                <i class="fas fa-save"></i> Guardar orden
+            </button>
+        </form>
+    </div>
+</div>
+
+
+<div *ngIf="products.length > 0" class="modal fade" id="addProduct" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar productos</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="list-group">
+                <li class="list-group-item" *ngFor="let product of products">
+                    <input class="form-check-input me-1" type="radio" (change)="radioChange(product)" name="listGroupRadio" [value]="product.id" id="firstRadio" checked>
+                    <a class="list-group-item list-group-item-action active" aria-current="true">
+                        <div class="d-flex w-100 justify-content-between">
+                          <h5 class="mb-1">{{product.name}}</h5>
+                          <small>
+                              <img [src]="product.image" width="80" height="80"/>
+                          </small>
+                        </div>
+                        <p class="mb-1">{{product.description}}</p>
+                        <small>{{product.stock}} unideades disponibles</small>
+                      </a>
+                </li>    
+            </div>
+            <div class="row" *ngIf="selectedProduct">
+                <label for="units" class="form-label">Unidades a comprar:</label>
+                <input type="number" [(ngModel)]="orderDetails.count" [value]="orderDetails.count" (input)="validateStock($event)" min="1" [max]="selectedProduct.stock" id="units" class="form-control" aria-describedby="passwordHelpBlock">
+                    <div id="passwordHelpBlock" class="form-text">
+                        Las unidades seleccionadas se quitarán de stock hasta que se confirme la orden
+                    </div>
+                    <div class="form-text" *ngIf="selectedProduct && orderDetails.count > 0">
+                        El monto por {{orderDetails.count}} unidades será {{selectedProduct.price * orderDetails.count | currency: 'GTQ':'symbol':'2.2-2'}}
+                    </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-primary" [disabled]="!selectedProduct" (click)="addToDetails()">Agregar</button>
+        </div>
+      </div>
+    </div>
+  </div>

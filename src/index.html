@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>PetHope - UMG</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Oswald:wght@500;600;700&family=Pacifico&display=swap" rel="stylesheet"> 
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="./assets/lib/bootstrap/bootstrap.min.css" rel="stylesheet">
+    
+    <link rel="icon" type="image/x-icon" href="./assets/img/favicon.ico">
+
+</head>
+<body>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery.easing@1.4.1/jquery.easing.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/waypoints@4.0.1/lib/jquery.waypoints.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery.counterup@2.1.0/jquery.counterup.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/owl.carousel.min.js"></script>
+
+  <script type="text/javascript">
+    (function ($) {
+      "use strict";
+  
+      // Sticky Navbar
+      $(window).scroll(function () {
+          if ($(this).scrollTop() > 40) {
+              $('.navbar').addClass('sticky-top');
+          } else {
+              $('.navbar').removeClass('sticky-top');
+          }
+      });
+      
+      // Dropdown on mouse hover
+      $(document).ready(function () {
+          function toggleNavbarMethod() {
+              if ($(window).width() > 992) {
+                  $('.navbar .dropdown').on('mouseover', function () {
+                      $('.dropdown-toggle', this).trigger('click');
+                  }).on('mouseout', function () {
+                      $('.dropdown-toggle', this).trigger('click').blur();
+                  });
+              } else {
+                  $('.navbar .dropdown').off('mouseover').off('mouseout');
+              }
+          }
+          toggleNavbarMethod();
+          $(window).resize(toggleNavbarMethod);
+      });
+  
+  
+      // Modal Video
+      $(document).ready(function () {
+          var $videoSrc;
+          $('.btn-play').click(function () {
+              $videoSrc = $(this).data("src");
+          });
+  
+          $('#videoModal').on('shown.bs.modal', function (e) {
+              $("#video").attr('src', $videoSrc + "?autoplay=1&amp;modestbranding=1&amp;showinfo=0");
+          })
+  
+          $('#videoModal').on('hide.bs.modal', function (e) {
+              $("#video").attr('src', $videoSrc);
+          })
+      });
+      
+      
+      // Back to top button
+      $(window).scroll(function () {
+          if ($(this).scrollTop() > 100) {
+              $('.back-to-top').fadeIn('slow');
+          } else {
+              $('.back-to-top').fadeOut('slow');
+          }
+      });
+      $('.back-to-top').click(function () {
+          $('html, body').animate({scrollTop: 0}, 1500, 'easeInOutExpo');
+          return false;
+      });
+  
+  
+      // Facts counter
+      $('[data-toggle="counter-up"]').counterUp({
+          delay: 10,
+          time: 2000
+      });
+  
+  
+      // Testimonials carousel
+      $(".testimonial-carousel").owlCarousel({
+          autoplay: true,
+          smartSpeed: 1500,
+          margin: 45,
+          dots: true,
+          loop: true,
+          center: true,
+          responsive: {
+              0:{
+                  items:1
+              },
+              576:{
+                  items:1
+              },
+              768:{
+                  items:2
+              },
+              992:{
+                  items:3
+              }
+          }
+      });
+      
+  })(jQuery);  
+  </script>
+  <app-root></app-root>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<div class="card">
+    <div class="card-body">
+        <h6 class="card-title display-4 text-uppercase text-black mb-4">Crear nuevo cliente</h6>
+        <h2 class="card-subtitle font-secondary text-primary mb-4">Ingrese los datos:</h2>
+        <form [formGroup]="createForm">
+            <div class="row">
+                <div class="col">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Nombre(s):</label>
+                        <input type="text" formControlName="name" class="form-control" id="name" name="name" required>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="mb-3">
+                        <label for="surname" class="form-label">Apellido(s):</label>
+                        <input type="text" formControlName="surname" class="form-control" id="surname" name="surname" required>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="row">
+                <div class="col">
+                    <div class="mb-2">
+                        <label for="email" class="form-label">Email:</label>
+                        <input type="email" formControlName="email" class="form-control" id="email" name="email" required>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="mb-2">
+                        <label for="phone" class="form-label">Teléfono:</label>
+                        <input type="text" formControlName="phone" class="form-control" id="phone" name="phone" required>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="mb-2">
+                        <label for="nit" class="form-label">NIT:</label>
+                        <input type="text" formControlName="nit" class="form-control" id="nit" name="nit" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <div class="mb-2">
+                        <label for="address" class="form-label">Dirección:</label>
+                    <textarea formControlName="address" class="form-control" id="address" name="address" rows="2"></textarea>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="mb-2">
+                        <label for="payment" class="form-label">Tipo pago:</label>
+                        <select id="payment" class="form-select" formControlName="payment" aria-label="Multiple select example">
+                            <option selected disabled>Seleccione el tipo de pago</option>
+                            <option value="money">Al contado</option>
+                            <option value="credit">Crédito</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary" [disabled]="!createForm.valid" (click)="saveClient()">
+                <i class="fas fa-save"></i> Guardar
+            </button>
+        </form>
+    </div>
+</div>

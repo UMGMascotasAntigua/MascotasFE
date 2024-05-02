@@ -1,0 +1,20 @@
+<div class="card">
+    <div class="card-body">
+        <h6 class="card-title display-4 text-uppercase text-black mb-4">Crear nuevo relleno</h6>
+        <h2 class="card-subtitle font-secondary text-primary mb-4">Ingrese los datos:</h2>
+        <form [formGroup]="createForm">
+            <div class="mb-3">
+                <label for="name" class="form-label">Nombre:</label>
+                <input type="text" formControlName="name" class="form-control" id="name" name="name" required>
+            </div>
+            <div class="mb-3">
+                <label for="description" class="form-label">Descripción:</label>
+                <textarea formControlName="description" class="form-control" id="description" name="description" rows="2"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary" [disabled]="!createForm.valid" (click)="saveFilling()">
+                <i class="fas fa-save"></i> Guardar
+            </button>
+        </form>
+    </div>
+</div>

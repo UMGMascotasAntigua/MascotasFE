@@ -1,0 +1,84 @@
+<div class="card">
+    <div class="card-body">
+        <h6 class="card-title display-4 text-uppercase text-black mb-4">Crear nuevo pastel</h6>
+        <h2 class="card-subtitle font-secondary text-primary mb-4">Ingrese los datos:</h2>
+        <form [formGroup]="createForm">
+            <div class="mb-3">
+                <label for="name" class="form-label">Nombre:</label>
+                <input type="text" formControlName="name" class="form-control" id="name" name="name" required>
+            </div>
+            <div class="mb-3">
+                <label for="description" class="form-label">Descripción:</label>
+                <textarea formControlName="description" class="form-control" id="description" name="description" rows="2"></textarea>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="mb-2">
+                        <label for="family" class="form-label">Categoría pastel:</label>
+                        <select id="family" class="form-select" formControlName="family" aria-label="Multiple select example">
+                            <option selected disabled>Seleccione la categoría de pastel</option>
+                            <option *ngFor="let fam of families" [value]="fam.id">{{fam.description}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="mb-2">
+                        <label for="flavor" class="form-label">Sabor:</label>
+                        <select id="flavor" class="form-select" formControlName="flavor" aria-label="Multiple select example">
+                            <option selected disabled>Seleccione el sabor del pastel</option>
+                            <option *ngFor="let flav of flavors" [value]="flav.id">{{flav.description}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="mb-2">
+                        <label for="filling" class="form-label">Relleno:</label>
+                        <select id="filling" class="form-select" formControlName="filling" aria-label="Multiple select example">
+                            <option selected disabled>Seleccione el relleno del pastel</option>
+                            <option *ngFor="let fill of fillings" [value]="fill.id">{{fill.description}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="mb-2">
+                        <label for="price" class="form-label">Precio:</label>
+                        <input type="number" id="price" step=".10" formControlName="price" class="form-control" required> 
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="mb-2">
+                        <label for="stock" class="form-label">Stock:</label>
+                        <input type="number" step="1" id="stock" formControlName="stock" class="form-control" required> 
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <div class="row">
+                <h2 class="card-subtitle font-secondary text-primary mb-4">Ingredientes:</h2>
+                <div class="col">
+                    <div class="input-group mb-2">
+                        <input type="text" class="form-control" formControlName="ingredient" placeholder="Ingrediente">
+                        <button class="btn btn-primary" type="button" id="button-addon2" (click)="addIngredient()">Agregar</button>
+                      </div>
+                </div>
+                <div class="col">
+                    <ul class="list-group">
+                        <li *ngIf="ingredients && ingredients.length < 1" class="list-group-item">No hay ingredientes registrados</li>
+                        <li *ngFor="let ing of ingredients" class="list-group-item">{{ing}}</li>
+                      </ul>
+                </div>
+            </div>
+            <br/>
+            <h2 class="card-subtitle font-secondary text-primary mb-4">Presentación:</h2>
+
+            <div class="mb-3">
+                <label for="image" class="form-label">Imagen:</label>
+                <textarea formControlName="image" class="form-control" id="image" name="image" rows="2"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary" [disabled]="!createForm.valid" (click)="saveCake()">
+                <i class="fas fa-save"></i> Guardar Pastel
+            </button>
+        </form>
+    </div>
+</div>

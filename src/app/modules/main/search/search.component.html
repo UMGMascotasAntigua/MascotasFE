@@ -1,0 +1,107 @@
+<div class="container-fluid bg-primary py-5 mb-5 hero-header">
+    <div class="container py-5">
+        <div class="row justify-content-start">
+            <div class="col-lg-8 text-center text-lg-start">
+                <h4 class="display-1 text-uppercase text-white mb-4">Búsqueda de mascotas</h4>
+                <h1 class="font-secondary text-primary mb-4">Ingrese su filtro</h1>
+                <div class="d-flex align-items-center justify-content-center justify-content-lg-start pt-5">
+                    <div class="container">
+                        <form [formGroup]="searchForm">
+                          <div class="col-auto">
+                            <label for="queryInput" class="visually-hidden">Ingrese su query</label>
+                            <input formControlName="query" (input)="parseQuery()"  type="text" class="form-control" id="queryInput" placeholder="Ejemplo: Horneado y sabor fresa y relleno (chocolate o arequipe)">
+                          </div>
+                          <div class="col-auto">
+                            <button type="submit" autocomplete="false" (click)="applyFilters()" class="btn btn-primary mb-3" [disabled]="!searchForm.valid">Buscar</button>
+                          </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+
+  <div class="container-fluid about py-5" *ngIf="cakes && cakes.length > 0">
+    <div class="container">
+        <div class="section-title position-relative text-center mx-auto mb-5 pb-3" style="max-width: 600px;">
+            <h2 class="text-primary font-secondary">Resultados de la búsqueda:</h2>
+            <h1 class="display-4 text-uppercase">De pasteles</h1>
+        </div>
+        <div class="tab-class text-center">
+            <div class="tab-content">
+                <div id="tab-1" class="tab-pane fade show p-0 active">
+                    <div class="row g-3">
+                        <div class="col-lg-6" *ngFor="let cake of cakes">
+                            <div class="d-flex h-100">
+                                <div class="flex-shrink-0">
+                                    <img class="img-fluid" [src]="cake.image" alt="" style="width: 150px; height: 85px;">
+                                    <h4 class="bg-dark text-primary p-2 m-0">{{cake.price | currency:'Q':true:'2.2-2'}}</h4>
+                                </div>
+                                <div class="d-flex flex-column justify-content-center text-start bg-secondary border-inner px-4">
+                                  <br/>
+                                    <h5 class="text-uppercase">{{cake.name}}</h5>
+                                    <span>{{cake.description}}</span>
+                                    <span>Stock {{cake.stock}}</span>
+                                    <br/>
+                                    <div class="row">
+                                      <div class="col">
+                                        <button class="btn btn-success" 
+                                        (click)="selectedCake = cake"
+                                        data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                          <i class="bi bi-eye"></i>
+                                        </button>
+                                        <button class="btn btn-primary" (click)="addToCart(cake)" [disabled]="cake.stock < 1">
+                                          <i class="bi bi-cart"></i>
+                                        </button>
+                                      </div>
+                                    </div>
+                                    <br/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+  <div class="container-fluid about py-5" *ngIf="searchForm.touched && searchForm.dirty && cakes && cakes.length == 0">
+    <div class="container">
+        <div class="section-title position-relative text-center mx-auto mb-5 pb-3" style="max-width: 600px;">
+            <h2 class="text-primary font-secondary">Resultados de la búsqueda:</h2>
+            <h1 class="display-4 text-uppercase">No se encontraron pasteles con esos filtros</h1>
+        </div>
+    </div>
+  </div>
+
+
+  <div *ngIf="selectedCake" class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5 font-secondary text-black mb-4 text-center" id="exampleModalLabel">{{selectedCake.name}}</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="card w-80 mb-4 text-center">
+            <img [src]="selectedCake.image" class="card-img-top" [alt]="'Foto de' + selectedCake.name">
+            <div class="card-body">
+              <h5 class="card-title display-8 text-uppercase">{{selectedCake.name}}</h5>
+              <p class="card-text display-8 text-black mb-4 text-truncate">{{selectedCake.description}}</p>
+              <p class="card-text display-8 text-black mb-4">Precio: <b>{{selectedCake.price | currency:'Q':true:'2.2-2'}}</b></p>
+              <h4 class="card-text display-8 text-black mb-4"><b>Ingredientes:</b></h4>
+              <ul class="list-group">
+                <li *ngFor="let ing of selectedCake.ingredients" class="list-group-item list-group-item-light">
+                  {{ing.name}}
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>

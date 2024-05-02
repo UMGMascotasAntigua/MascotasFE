@@ -1,0 +1,41 @@
+<div class="card">
+    <table class="table table-primary">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Cliente</th>
+            <th scope="col">Fecha</th>
+            <th scope="col">Total (GTQ)</th>
+            <th scope="col">Estado</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let order of orders">
+            <th scope="row">{{order.order.id}}</th>
+            <td>{{order.client.name}} {{order.client.surname}}</td>
+            <td>{{order.order.date | date: 'dd/MM/yyyy'}}</td>
+            <td>{{order.order.total | currency:'Q':true:'2.2-2'}}</td>
+            <td>
+                <p *ngIf="order.order.state == 'in progress'">En proceso</p>
+                <p *ngIf="order.order.state == 'traveling'">En ruta</p>
+                <p *ngIf="order.order.state == 'finished'">Finalizada</p>
+                <p *ngIf="order.order.state == 'canceled'">Cancelada</p>
+            </td>
+            <td *ngIf="order.order.state == 'in progress'">
+                <button type="button" class="btn btn-danger">Cancelar</button>&nbsp;
+                <button type="button" class="btn btn-primary">Salir a ruta</button>
+            </td>
+            <td *ngIf="order.order.state == 'traveling'">
+                <button type="button" class="btn btn-primary">Trackear</button>
+            </td>
+            <td *ngIf="order.order.state == 'finished'">
+                <button type="button" class="btn btn-primary" disabled>No hay acciones disponibles</button>
+            </td>
+            <td *ngIf="order.order.state == 'canceled'">
+                <button type="button" class="btn btn-primary" disabled>Re-activar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+</div>
