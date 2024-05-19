@@ -2,11 +2,6 @@ import { Component } from '@angular/core';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { FormGroup, FormControl } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { CakeService } from 'src/app/services/cake.service';
-import { CartService } from 'src/app/services/cart.service';
-import { FamilyService } from 'src/app/services/family.service';
-import { FillingService } from 'src/app/services/filling.service';
-import { FlavorService } from 'src/app/services/flavor.service';
 
 @Component({
   selector: 'app-search',
@@ -27,57 +22,26 @@ export class SearchComponent {
   selectedCake: any = null;
 
   constructor(
-    private _fb: FormBuilder,
-    private cakeService: CakeService,
-    private toast: ToastrService,
-    private cart: CartService,
-    private familyService: FamilyService,
-    private fillingService: FillingService,
-    private flavorService: FlavorService
+    private _fb: FormBuilder
   ) {
     this.searchForm = this._fb.group({
       query: ['', Validators.required],
     });
 
-    this.familyService.getFamilies().subscribe((e) => {
-      if (e.success == true) {
-        this.families = e.result;
-      } else {
-        this.families = [];
-      }
-    });
-
-    this.fillingService.getFillings().subscribe((e) => {
-      if (e.success == true) {
-        this.fillings = e.result;
-      } else {
-        this.fillings = [];
-      }
-    });
-
-    this.flavorService.getFlavors().subscribe((e) => {
-      if (e.success == true) {
-        this.flavors = e.result;
-      } else {
-        this.flavors = [];
-      }
-    });
+  
   }
 
   public addToCart(cake: any) {
-    this.toast.success('Pastel añadido al carrito', 'Carrito', {
-      timeOut: 4500,
-    });
-    this.cart.addToCart(cake);
+
   }
 
   public applyFilters() {
     this.cakes = [];
-    this.cakeService
-      .getFilteredCakes(this.filters)
-      .subscribe((e) => {
-        this.cakes = e.result;
-      });
+    // this.cakeService
+    //   .getFilteredCakes(this.filters)
+    //   .subscribe((e) => {
+    //     this.cakes = e.result;
+    //   });
   }
 
   public async parseQuery() {

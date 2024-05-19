@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { CartService } from 'src/app/services/cart.service';
 
 @Component({
   selector: 'app-navbar',
@@ -15,7 +14,7 @@ export class NavbarComponent implements OnInit{
       // this.router.events.subscribe((e) =)
   }
 
-  constructor(private router: Router, private cart: CartService, private toast: ToastrService){
+  constructor(private router: Router, private toast: ToastrService){
     this.menus = [
       {
         name: 'Inicio',
@@ -46,8 +45,7 @@ export class NavbarComponent implements OnInit{
   }
 
   get items():any[]{
-    const c = this.cart.getCart()
-    return c
+    return [];
   }
 
   public payCart(){

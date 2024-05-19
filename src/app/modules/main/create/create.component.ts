@@ -2,11 +2,6 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Cake } from 'src/app/models/Cake';
-import { CakeService } from 'src/app/services/cake.service';
-import { FamilyService } from 'src/app/services/family.service';
-import { FillingService } from 'src/app/services/filling.service';
-import { FlavorService } from 'src/app/services/flavor.service';
-
 @Component({
   selector: 'app-create',
   templateUrl: './create.component.html',
@@ -21,10 +16,6 @@ export class CreateComponent {
   ingredients: string[] = [];
 
   constructor(private fb: FormBuilder, 
-    private cakeService: CakeService,
-    private familyService: FamilyService,
-    private fillingService: FillingService, 
-    private flavorService: FlavorService,
     private toast: ToastrService){
     this.createForm = this.fb.group({
       name: ['', Validators.required],
@@ -36,26 +27,6 @@ export class CreateComponent {
       price: [0.00, Validators.required],
       image: ['', Validators.required],
       stock: [0, Validators.required]
-    })
-    this.familyService.getFamilies()
-    .subscribe((e) => {
-      if(e.success == true){
-        this.families = e.result;
-      }
-    })
-
-    this.fillingService.getFillings()
-    .subscribe((e) => {
-      if(e.success == true){
-        this.fillings = e.result;
-      }
-    })
-
-    this.flavorService.getFlavors()
-    .subscribe((e) => {
-      if(e.success == true){
-        this.flavors = e.result;
-      }
     })
   }
 
@@ -73,19 +44,6 @@ export class CreateComponent {
       this.createForm.controls['stock'].value,
     );
 
-    this.cakeService.addCake(cake)
-    .subscribe((e) => {
-      if(e.success == true){
-        this.toast.success("Pastel guardado con éxito", "Registro", {
-          timeOut: 4500
-        });
-        this.createForm.reset();
-      }else{
-        this.toast.warning(e.message, "Registro", {
-          timeOut: 4500
-        })
-      }
-    })
   }
 
   public addIngredient(){

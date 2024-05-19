@@ -11,7 +11,6 @@ import { HttpReqInterceptor } from './interceptors/HttpInterceptor';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
-import { CartService } from './services/cart.service';
 
 @NgModule({
   declarations: [
@@ -55,7 +54,6 @@ import { CartService } from './services/cart.service';
       useClass: HttpReqInterceptor,
       multi: true
     },
-    CartService
   ],
   bootstrap: [AppComponent]
 })
