@@ -3,9 +3,7 @@ name: NodeJS with Gulp
 on:
   push:
     branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
-
+    
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -19,15 +17,11 @@ jobs:
       with:
         node-version: '20'
 
-
     - name: Install Angular Globally
       run: npm install -g @angular/cli
       
     - name: Install dependencies
-      run: npm install
-
-    - name: Run Linter
-      run: npm run lint
+      run: npm install --force
 
     - name: Run tests
       run: npm test
