@@ -3,14 +3,14 @@ name: NodeJS with Gulp
 on:
   push:
     branches: [ "master" ]
-    
+
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout Repository
-    - uses: actions/checkout@v4
+      uses: actions/checkout@v3
 
     - name: Use Node.js
       uses: actions/setup-node@v3
@@ -19,9 +19,9 @@ jobs:
 
     - name: Install Angular Globally
       run: npm install -g @angular/cli
-      
+
     - name: Install dependencies
-      run: npm install --force
+      run: npm install
 
     - name: Run tests
       run: npm test
