@@ -6,7 +6,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { TopbarComponent } from './components/topbar/topbar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { NgxUiLoaderModule } from 'ngx-ui-loader';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { HttpReqInterceptor } from './interceptors/HttpInterceptor';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -40,13 +40,14 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
       logoSize: 250,
       logoPosition: 'center-center',
       blur: 50,
-      text: getRandomMessage(),
-      fgsType: 'ball-spin-clockwise-fade-rotating',
-      fgsSize: 50,
+      text: 'Cargando...',
+      fgsType: 'three-bounce',
+      fgsSize: 75,
       fgsColor: '#fff',
       textPosition: 'center-center',
       hasProgressBar: true
-    })
+    }),
+    HttpClientModule
   ],
   providers: [
     {

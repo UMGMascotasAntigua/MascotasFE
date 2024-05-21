@@ -7,34 +7,30 @@
             </div>
         </div>
     </div>
-  </div>
+</div>
 
-  <!-- <div class="container-fluid about py-5" *ngIf="cakes && cakes.length > 0">
-    <div class="container">
-        <div class="section-title position-relative text-center mx-auto mb-5 pb-3" style="max-width: 600px;">
-            <h2 class="text-primary font-secondary">Menú</h2>
-            <h1 class="display-4 text-uppercase">pasteles disponibles:</h1>
-        </div>
-        <div class="tab-class text-center">
-            <div class="tab-content">
-                <div id="tab-1" class="tab-pane fade show p-0 active">
-                    <div class="row g-3">
-                        <div class="col-lg-6" *ngFor="let cake of cakes">
-                            <div class="d-flex h-100">
-                                <div class="flex-shrink-0">
-                                    <img class="img-fluid" [src]="cake.image" alt="" style="width: 150px; height: 85px;">
-                                    <h4 class="bg-dark text-primary p-2 m-0">{{cake.price | currency:'Q':true:'2.2-2'}}</h4>
-                                </div>
-                                <div class="d-flex flex-column justify-content-center text-start bg-secondary border-inner px-4">
-                                    <h5 class="text-uppercase">{{cake.name}}</h5>
-                                    <span>{{cake.description}}</span>
-                                    <span>Stock {{cake.stock}}</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+<div class="container">
+    <h1 class="my-5">Mascotas Disponibles para Adopción</h1>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="col" *ngFor="let mascota of mascotas">
+            <div class="card">
+                <img [src]="photoEndpoint+mascota.foto" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{ mascota.nombre_Mascota }}</h5>
+                    <p class="card-text"><strong>Raza:</strong> {{ mascota.raza }}</p>
+                    <p class="card-text"><strong>Edad:</strong> {{ mascota.edad }}</p>
+                    <p class="card-text"><strong>Estado:</strong> {{ mascota.estado }}</p>
+                    <p class="card-text"><strong>Información:</strong> {{ mascota.informacion }}</p>
+                    <p class="card-text"><strong>Comentarios:</strong> {{ mascota.comentarios }}</p>
+                    <button *ngIf="mascota.estado === 'Disponible'" class="btn btn-primary me-2" (click)="adoptar(mascota)">Adoptar</button>
+                    <button class="btn btn-outline-danger favorite-btn" (click)="toggleFavorita(mascota)">
+                        <i class="fas fa-heart" [class.favorite-icon]="mascota.favoritos"></i> Agregar a Favoritos
+                    </button>
                 </div>
             </div>
         </div>
     </div>
-  </div> -->
+</div>
+
+
+  
