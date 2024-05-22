@@ -23,7 +23,7 @@ export class NavbarComponent implements OnInit{
       },
       {
         name: 'Mascotas',
-        route: '/main/menu',
+        route: '/main/pets',
         type: 'simple'
       },
       {
