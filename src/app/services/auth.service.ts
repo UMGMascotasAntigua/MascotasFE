@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { environment } from '../environment/environment';
+import { ApiResponse } from '../models/ApiResponse';
 
 @Injectable()
 export class AuthService {
@@ -12,11 +13,11 @@ export class AuthService {
     return response || {} as T;
   }
 
-  public doLogin(user: string, password: string){
-    return this.http.post(`${this.api}/login`, {
+  public doLogin(user: string, password: string) : Observable<ApiResponse>{
+    return this.http.post<ApiResponse>(`${this.api}login`, {
       user: user,
       password: password
     })
-    .pipe(map(this.extractData))
+    .pipe(map(this.extractData<ApiResponse>))
   }
 }

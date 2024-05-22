@@ -22,8 +22,8 @@
                     <p class="card-text"><strong>Estado:</strong> {{ mascota.estado }}</p>
                     <p class="card-text"><strong>Información:</strong> {{ mascota.informacion }}</p>
                     <p class="card-text"><strong>Comentarios:</strong> {{ mascota.comentarios }}</p>
-                    <button *ngIf="mascota.estado === 'Disponible'" class="btn btn-primary me-2" (click)="adoptar(mascota)">Adoptar</button>
-                    <button class="btn btn-outline-danger favorite-btn" (click)="toggleFavorita(mascota)">
+                    <button *ngIf="mascota.estado === 'Disponible'" class="btn btn-primary me-2" (click)="adoption(mascota)">Adoptar</button>
+                    <button class="btn btn-outline-danger favorite-btn" (click)="addToFavorites(mascota)">
                         <i class="fas fa-heart" [class.favorite-icon]="mascota.favoritos"></i> Agregar a Favoritos
                     </button>
                 </div>

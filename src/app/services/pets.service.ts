@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../environment/environment';
 import { Observable, map } from 'rxjs';
 import { ApiResponse } from '../models/ApiResponse';
+import { Pet } from '../models/Pet';
 
 @Injectable()
 export class PetsService {
@@ -16,6 +17,11 @@ export class PetsService {
 
   public getPets(): Observable<ApiResponse>{
     return this.http.get<ApiResponse>(`${this.api}all/`)
+    .pipe(map(this.extractData<ApiResponse>))
+  }
+
+  public addToFavorites(pet: Pet): Observable<ApiResponse>{
+    return this.http.post<ApiResponse>(`${this.api}favorites/add/${pet.codigo_Mascota}`, null)
     .pipe(map(this.extractData<ApiResponse>))
   }
 }

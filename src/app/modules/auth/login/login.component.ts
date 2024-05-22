@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -13,7 +14,9 @@ import { AuthService } from 'src/app/services/auth.service';
 export class LoginComponent {
   public form: FormGroup;
 
-  constructor(private _fb: FormBuilder, private toastr: ToastrService, private auth: AuthService){
+  constructor(private _fb: FormBuilder, private toastr: ToastrService, private auth: AuthService,
+    private router: Router
+  ){
     this.form = this._fb.group({
       email: ['', Validators.compose([Validators.required, Validators.email])],
       password: ['', Validators.required]
@@ -22,12 +25,24 @@ export class LoginComponent {
 
   public doLogin(){
     if(!this.form.valid){
-      this.toastr.warning("Debe completar todos los campos", "Formulario incompleto", {
-        timeOut: 3500
-      })
+      this.toastr.warning("Debe completar todos los campos o verificar que esté correcto", "Formulario no válido", {
+        timeOut: 4500
+      });
     }else{
       this.auth.doLogin(this.form.controls['email'].value, this.form.controls['password'].value)
-      .subscribe((e) => console.log(e))
+      .subscribe((e) => {
+        if(e.success == true){
+          this.toastr.success("Sesión iniciada con éxito", "Autenticación", {
+            timeOut: 3500
+          });
+          localStorage.setItem('petsToken', e.result ?? "");
+          this.router.navigate(['/main/home'])
+        }else{
+          this.toastr.error(e.message ?? "Error de autenticación", "Autenticación", {
+            timeOut: 4500
+          })
+        }
+      })
     }
   }
 }
