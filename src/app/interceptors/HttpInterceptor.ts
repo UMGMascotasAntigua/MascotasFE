@@ -17,18 +17,19 @@ export class HttpReqInterceptor implements HttpInterceptor {
   constructor(private loader: NgxUiLoaderService, private router: Router, private toast: ToastrService) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
+    const token = localStorage.getItem('petsToken') ?? null;
     // const token = localStorage.getItem('shoppaytoken') ?? null;
-    // var newReq = null;
-    // if(token != null && token.trim() != "" && token.length > 0){
-    //     const headers = request.headers
-    //     .set('Authorization', `Bearer ${token}`)
-    //     newReq = request.clone({headers});
-    // }else{
-    //     newReq = request;
-    // }
+    var newReq = null;
+    if(token != null && token.trim() != "" && token.length > 0){
+        const headers = request.headers
+        .set('Authorization', `Bearer ${token}`)
+        newReq = request.clone({headers});
+    }else{
+        newReq = request;
+    }
     
     this.loader.start();
-    return next.handle(request).pipe(
+    return next.handle(newReq).pipe(
       catchError((error: any) => {
         if(error instanceof HttpErrorResponse){
           switch(error.status){

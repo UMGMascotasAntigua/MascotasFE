@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { CreateComponent } from './create/create.component';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { CartComponent } from './cart/cart.component';
+import { PetsService } from 'src/app/services/pets.service';
 
 
 @NgModule({
@@ -28,6 +29,8 @@ import { CartComponent } from './cart/cart.component';
     SweetAlert2Module,
     FormsModule,
   ],
-  providers: []
+  providers: [
+    PetsService
+  ]
 })
 export class MainModule { }
