@@ -1,1 +1,23 @@
-<p>add-pet works!</p>
+<div class="container">
+    <form action="/submit-vaccine-detail" method="post">
+        <h2>Detalle de Vacunación</h2>
+        <div class="input-group">
+            <label for="codigo_mascota">Código de Mascota:</label>
+            <select id="codigo_mascota" name="codigo_mascota" required>
+                <!-- Opciones llenadas dinámicamente desde la base de datos -->
+                <option value="">Seleccione una mascota</option>
+            </select>
+        </div>
+        <div class="input-group">
+            <label for="codigo_vacuna">Código de Vacuna:</label>
+            <select id="codigo_vacuna" name="codigo_vacuna" required>
+                <!-- Opciones llenadas dinámicamente desde la base de datos -->
+                <option value="">Seleccione una vacuna</option>
+            </select>
+        </div>
+        <div class="input-group">
+            <label for="fecha_aplicacion">Fecha de Aplicación:</label>
+            <input type="date" id="fecha_aplicacion" name="fecha_aplicacion" required>
+        </div>
+    </form>
+</div>
