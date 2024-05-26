@@ -32,9 +32,9 @@ export class NavbarComponent implements OnInit{
         type: 'simple'
       },
       {
-        name: 'Campañas',
-        route: '/main/campaigns',
-        type: 'dropdown'
+        name: 'Vacunas',
+        route: '/vacunas',
+        type: 'simple'
       },
       {
         name: 'Iniciar sesión',

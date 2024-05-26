@@ -15,7 +15,11 @@ const routes: Routes = [
   {
     path: 'main',
     loadChildren: () => import('./modules/main/main.module').then(m => m.MainModule),
-  }
+  },
+  {
+    path: 'vacunas',
+    loadChildren: () => import('./modules/vaccine/vaccine.module').then(m => m.VaccineModule),
+  },
 ];
 
 @NgModule({
