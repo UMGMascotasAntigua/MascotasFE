@@ -38,11 +38,11 @@ export class NavbarComponent implements OnInit{
         children: [
           {
             name: 'Agregar Vacuna',
-            route: '/vacun',
+            route: '/vacunas/agregar',
           },
           {
             name: 'Vacunar',
-            route: '/vacunas',
+            route: '/vacunas/vacunar',
           }
         ]
       },
