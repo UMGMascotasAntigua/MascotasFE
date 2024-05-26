@@ -9,19 +9,19 @@ import { Pet } from '../models/Pet';
 export class PetsService {
   constructor(private http: HttpClient) { }
 
-  public api: string = `${environment.apiUrl}pets/`
+  public api: string = `${environment.apiUrl}pet/`
 
   private extractData<T>(response:any): T{
     return response || {} as T;
   }
 
   public getPets(): Observable<ApiResponse>{
-    return this.http.get<ApiResponse>(`${this.api}all/`)
+    return this.http.get<ApiResponse>(`${this.api}`)
     .pipe(map(this.extractData<ApiResponse>))
   }
 
   public addToFavorites(pet: Pet): Observable<ApiResponse>{
-    return this.http.post<ApiResponse>(`${this.api}favorites/add/${pet.codigo_Mascota}`, null)
+    return this.http.post<ApiResponse>(`${this.api}favorites/add/${pet.Codigo_Mascota}`, null)
     .pipe(map(this.extractData<ApiResponse>))
   }
 }

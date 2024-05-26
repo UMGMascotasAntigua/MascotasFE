@@ -20,4 +20,12 @@ export class AuthService {
     })
     .pipe(map(this.extractData<ApiResponse>))
   }
+
+  public isAuthenticated(): boolean | Promise<boolean>{
+    const token = localStorage.getItem('petsToken');
+    if(token != null && token !== '' && token !== undefined){
+      return true;
+    }
+    return false;
+  }
 }

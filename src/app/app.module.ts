@@ -26,7 +26,6 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
     SweetAlert2Module.forRoot(),
     ToastrModule.forRoot({
       preventDuplicates: true,
-      countDuplicates: true,
       tapToDismiss: true,
       autoDismiss: true,
       closeButton: true,

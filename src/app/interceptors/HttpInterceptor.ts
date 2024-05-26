@@ -10,6 +10,7 @@ import { Observable, catchError, finalize, throwError } from 'rxjs';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import Swal from 'sweetalert2';
 
 @Injectable()
 export class HttpReqInterceptor implements HttpInterceptor {
@@ -40,6 +41,32 @@ export class HttpReqInterceptor implements HttpInterceptor {
                 tapToDismiss: true
               })
             break;
+            case 403:
+              Swal.fire({
+                icon: 'warning',
+                titleText: 'Error: Recurso no permitido',
+                text: 'Usted no cuenta con los permisos para realizar esta acción.',
+                confirmButtonText: 'Cerrar',
+              });
+              break;
+            case 500:
+              Swal.fire({
+                icon: 'error',
+                titleText: 'Error del servidor',
+                text: 'Ocurrió un error del servidor, vuelva a intentar más tarde.',
+                confirmButtonText: 'Cerrar',
+                html: `<code>${error.message} - ${error.status} - ${error.url}</code>`,
+                footer: 'Vuelva a intentar más tarde'
+              });
+              break;
+            case 401:
+              Swal.fire({
+                icon: 'error',
+                titleText: 'No ha iniciado sesión o no tiene acceso a esta página',
+                text: 'Debe ingresar con sus credenciales para poder continuar con la navegación',
+                confirmButtonText: 'Cerrar'
+              });
+              break;
             default:
               this.toast.warning(`Ocurrió un error inesperado: 
               Código: ${error.status}.`, "Error del sistema", {

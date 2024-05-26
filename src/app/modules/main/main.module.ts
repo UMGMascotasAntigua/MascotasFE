@@ -11,6 +11,7 @@ import { CreateComponent } from './create/create.component';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { CartComponent } from './cart/cart.component';
 import { PetsService } from 'src/app/services/pets.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { PetsService } from 'src/app/services/pets.service';
     FormsModule,
   ],
   providers: [
-    PetsService
+    PetsService,
+    AuthService
   ]
 })
 export class MainModule { }

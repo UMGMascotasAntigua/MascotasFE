@@ -14,17 +14,17 @@
     <div class="row row-cols-1 row-cols-md-3 g-4">
         <div class="col" *ngFor="let mascota of mascotas">
             <div class="card">
-                <img [src]="photoEndpoint+mascota.foto" class="card-img-top" alt="...">
+                <img [src]="photoEndpoint+mascota.Codigo_Mascota" class="card-img-top" [alt]="'Foto de ' + mascota.Nombre_Mascota">
                 <div class="card-body">
-                    <h5 class="card-title">{{ mascota.nombre_Mascota }}</h5>
-                    <p class="card-text"><strong>Raza:</strong> {{ mascota.raza }}</p>
-                    <p class="card-text"><strong>Edad:</strong> {{ mascota.edad }}</p>
-                    <p class="card-text"><strong>Estado:</strong> {{ mascota.estado }}</p>
-                    <p class="card-text"><strong>Información:</strong> {{ mascota.informacion }}</p>
-                    <p class="card-text"><strong>Comentarios:</strong> {{ mascota.comentarios }}</p>
-                    <button *ngIf="mascota.estado === 'Disponible'" class="btn btn-primary me-2" (click)="adoption(mascota)">Adoptar</button>
+                    <h5 class="card-title">{{ mascota.Nombre_Mascota }}</h5>
+                    <p class="card-text"><strong>Raza:</strong> {{ mascota.Raza }}</p>
+                    <p class="card-text"><strong>Edad:</strong> {{ mascota.Edad }}</p>
+                    <p class="card-text"><strong>Estado:</strong> {{ mascota.Estado }}</p>
+                    <p class="card-text"><strong>Información:</strong> {{ mascota.Informacion }}</p>
+                    <p class="card-text"><strong>Comentarios:</strong> {{ mascota.Comentarios }}</p>
+                    <button *ngIf="mascota.Estado === 'Disponible'" class="btn btn-primary me-2" (click)="adoption(mascota)">Adoptar</button>
                     <button class="btn btn-outline-danger favorite-btn" (click)="addToFavorites(mascota)">
-                        <i class="fas fa-heart" [class.favorite-icon]="mascota.favoritos"></i> Agregar a Favoritos
+                        <i class="fas fa-heart" [class.favorite-icon]="mascota.Favoritos"></i> Agregar a Favoritos
                     </button>
                 </div>
             </div>
