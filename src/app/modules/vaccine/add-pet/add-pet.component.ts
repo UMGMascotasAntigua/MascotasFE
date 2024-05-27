@@ -43,9 +43,20 @@ export class AddPetComponent {
       })
     }else{
       let value = this.addVaccinationForm.value;
-      this.toast.success("Agregada", "Vacunación", {
-        timeOut: 3500
+
+      this.petsService.applyVaccine(value.pet, value.vaccine, new Date(value.date))
+      .subscribe((e) => {
+        if(e.success == true){
+          this.toast.success("Vacunación agregada a la mascota!", "Vacunación", {
+            timeOut: 4500
+          });
+        }else{
+          this.toast.error(e.message ?? "Error al agregar la vacuna", "Vacunación", {
+            timeOut: 4500
+          });
+        }
       });
+      
       this.addVaccinationForm.reset()
     }
   }

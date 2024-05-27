@@ -37,7 +37,13 @@ export class MenuComponent {
   addToFavorites(pet: Pet){
     if(this.auth.isAuthenticated()){
       this.petsService.addToFavorites(pet)
-      .subscribe((e) => console.log(e));
+      .subscribe((e) => {
+        if(e.success == true){
+          this.toastr.success(e.message ?? "Mascota agregada a favoritos", "Favoritos", {
+            timeOut: 4500
+          })
+        }
+      });
     }else{
       Swal.fire({
         titleText: "Necesita un usuario para hacer esto",
@@ -48,5 +54,20 @@ export class MenuComponent {
       })
     }
     
+  }
+
+  toggleFavorite(mascota: any): void {
+    mascota.Favoritos = !mascota.Favoritos;
+    if (mascota.Favoritos) {
+      // Lógica para agregar a favoritos
+      this.addToFavorites(mascota);
+    } else {
+      // Lógica para quitar de favoritos
+      this.removeFromFavorites(mascota);
+    }
+  }
+
+  removeFromFavorites(pet: any){
+
   }
 }

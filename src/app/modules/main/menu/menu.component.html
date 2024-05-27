@@ -22,10 +22,13 @@
                     <p class="card-text"><strong>Estado:</strong> {{ mascota.Estado }}</p>
                     <p class="card-text"><strong>Información:</strong> {{ mascota.Informacion }}</p>
                     <p class="card-text"><strong>Comentarios:</strong> {{ mascota.Comentarios }}</p>
-                    <button *ngIf="auth.isAuthenticated() && mascota.Estado === 'Disponible'" class="btn btn-primary me-2" (click)="adoption(mascota)">Adoptar</button>
-                    <button *ngIf="auth.isAuthenticated()"  class="btn btn-outline-danger favorite-btn" (click)="addToFavorites(mascota)">
-                        <i class="fas fa-heart" [class.favorite-icon]="mascota.Favoritos"></i> Agregar a Favoritos
+                    <button *ngIf="auth.isAuthenticated() && mascota.Estado === 'Disponible'" class="btn btn-primary me-2" (click)="adoption(mascota)">
+                        <i class="fas fa-paw"></i> Adoptar
                     </button>
+                    <button *ngIf="auth.isAuthenticated()" class="btn btn-outline-danger favorite-btn" (click)="toggleFavorite(mascota)">
+                        <i class="fas" [ngClass]="{'fa-star': mascota.Favoritos, 'fa-star-half-alt': !mascota.Favoritos}"></i>
+                        {{mascota.Favoritos ? 'Quitar de Favoritos' : 'Agregar a Favoritos'}}
+                    </button>                    
                     <a routerLink="/auth/login" *ngIf="!auth.isAuthenticated()" class="btn btn-primary me-2">Acceder para adoptar</a>
                 </div>
             </div>

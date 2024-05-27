@@ -26,4 +26,13 @@ export class PetsService {
     })
     .pipe(map(this.extractData<ApiResponse>))
   }
+
+  public applyVaccine(petCode: number, vaccineCode: number, date: Date):Observable<ApiResponse>{
+    return this.http.patch<ApiResponse>(`${this.api}vaccines/apply`, {
+      pet: Number(petCode),
+      vaccine: Number(vaccineCode),
+      date: date
+    })
+    .pipe(map(this.extractData<ApiResponse>))
+  }
 }
