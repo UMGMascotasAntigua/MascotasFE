@@ -118,7 +118,7 @@
   }
   
   .hero-header {
-    background: url(./assets/img/hero.jpg) top right no-repeat;
+    background: url(./assets/img/hero.webp) top right no-repeat;
     background-size: cover;
   }
   
@@ -310,6 +310,6 @@
   }
   
   .bg-img {
-    background: linear-gradient(rgba(43, 40, 37, .5), rgba(43, 40, 37, .5)), url(./assets/img/bg.jpg) center center no-repeat;
+    background: linear-gradient(rgba(43, 40, 37, .5), rgba(43, 40, 37, .5)), url(./assets/img/bgpets.jpg) center center no-repeat;
     background-size: cover;
   }

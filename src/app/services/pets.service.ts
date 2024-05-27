@@ -21,7 +21,9 @@ export class PetsService {
   }
 
   public addToFavorites(pet: Pet): Observable<ApiResponse>{
-    return this.http.post<ApiResponse>(`${this.api}favorites/add/${pet.Codigo_Mascota}`, null)
+    return this.http.patch<ApiResponse>(`${this.api}favorite`, {
+      pet: pet.Codigo_Mascota
+    })
     .pipe(map(this.extractData<ApiResponse>))
   }
 }

@@ -37,7 +37,7 @@ import { AuthService } from './services/auth.service';
     NgxUiLoaderModule.forRoot({
       bgsColor: '#fff',
       logoUrl: '../assets/img/loader.gif',
-      logoSize: 250,
+      logoSize: 320,
       logoPosition: 'center-center',
       blur: 50,
       text: 'Cargando...',

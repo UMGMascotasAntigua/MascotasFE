@@ -19,8 +19,12 @@ const routes: Routes = [
   {
     path: 'vacunas',
     loadChildren: () => import('./modules/vaccine/vaccine.module').then(m => m.VaccineModule),
-    canActivate: [AuthGuard]
+    // canActivate: [AuthGuard]
   },
+  {
+    path: 'castracion',
+    loadChildren: () => import('./modules/castration/castration.module').then(c => c.CastrationModule)
+  }
 ];
 
 @NgModule({

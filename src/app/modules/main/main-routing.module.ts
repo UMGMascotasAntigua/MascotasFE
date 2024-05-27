@@ -5,6 +5,7 @@ import { MenuComponent } from './menu/menu.component';
 import { SearchComponent } from './search/search.component';
 import { CreateComponent } from './create/create.component';
 import { CartComponent } from './cart/cart.component';
+import { UpdateComponent } from './update/update.component';
 
 const routes: Routes = [
   {
@@ -27,6 +28,10 @@ const routes: Routes = [
   {
     path: 'create',
     component: CreateComponent
+  },
+  {
+    path: 'update',
+    component: UpdateComponent
   },
   {
     path: 'cart',

@@ -12,6 +12,7 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { CartComponent } from './cart/cart.component';
 import { PetsService } from 'src/app/services/pets.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { UpdateComponent } from './update/update.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { AuthService } from 'src/app/services/auth.service';
     MenuComponent,
     SearchComponent,
     CreateComponent,
-    CartComponent
+    CartComponent,
+    UpdateComponent
   ],
   imports: [
     CommonModule,

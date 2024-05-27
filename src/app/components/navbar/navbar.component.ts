@@ -25,7 +25,13 @@ export class NavbarComponent implements OnInit{
       {
         name: 'Mascotas',
         route: '/main/pets',
-        type: 'simple'
+        type: 'dropdown',
+        children: [
+          {
+            name: 'Editar mascota',
+            route: '/main/update'
+          }
+        ]
       },
       {
         name: 'Buscar mascotas',
@@ -46,6 +52,11 @@ export class NavbarComponent implements OnInit{
             route: '/vacunas/vacunar',
           }
         ]
+      },
+      {
+        name: 'Castración',
+        route: '/castracion',
+        type: 'simple'
       },
       {
         name: auth.isAuthenticated() ? "Mi cuenta" : "Iniciar sesión",
