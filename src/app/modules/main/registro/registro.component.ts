@@ -5,6 +5,10 @@ import { Component } from '@angular/core';
   templateUrl: './registro.component.html',
   styleUrls: ['./registro.component.css']
 })
-export class HomeComponent {
+export class RegistroComponent {
+RegistroComponent($event: Event) {
+throw new Error('Method not implemented.');
+}
+registerPetForm: any;
 
 }
