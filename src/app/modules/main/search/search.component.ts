@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Form, FormArray, FormBuilder, Validators } from '@angular/forms';
 import { FormGroup, FormControl } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { environment } from 'src/app/environment/environment';
+import { Pet } from 'src/app/models/Pet';
 import { PetsService } from 'src/app/services/pets.service';
 
 @Component({
@@ -13,10 +15,11 @@ export class SearchComponent implements OnInit{
   filterForm: FormGroup;
   query: string = '';
   searchForm: FormGroup;
-
+  public photoEndpoint: string = `${environment.apiUrl}pet/photo/`;
   test: any = {};
   valueOpts: any[] = [];
   selectedCake: any = null;
+  public pets: Pet[] = [];
 
   constructor(
     private _fb: FormBuilder,
@@ -88,7 +91,13 @@ export class SearchComponent implements OnInit{
 
   this.petService.filterPets(filtros)
   .subscribe((e) => {
-    console.log(e)
+    if(e.success == true){
+      this.pets = e.result;
+    }else{
+      this.toast.error(e.message ?? "Error al filtrar las mascotas", "Filtro", {
+        timeOut: 4500
+      });
+    }
   })
   }
 

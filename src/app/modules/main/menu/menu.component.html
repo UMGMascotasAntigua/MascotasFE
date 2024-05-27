@@ -22,10 +22,10 @@
                     <p class="card-text"><strong>Estado:</strong> {{ mascota.Estado }}</p>
                     <p class="card-text"><strong>Información:</strong> {{ mascota.Informacion }}</p>
                     <p class="card-text"><strong>Comentarios:</strong> {{ mascota.Comentarios }}</p>
-                    <button *ngIf="auth.isAuthenticated() && mascota.Estado === 'Disponible'" class="btn btn-primary me-2" (click)="adoption(mascota)">
+                    <button *ngIf="auth.isAuthenticated() && mascota.Estado === 'Disponible' && isUser" class="btn btn-primary me-2" (click)="adoption(mascota)">
                         <i class="fas fa-paw"></i> Adoptar
                     </button>
-                    <button *ngIf="auth.isAuthenticated()" class="btn btn-outline-danger favorite-btn" (click)="toggleFavorite(mascota)">
+                    <button *ngIf="auth.isAuthenticated() && isUser" class="btn btn-outline-danger favorite-btn" (click)="toggleFavorite(mascota)">
                         <i class="fas" [ngClass]="{'fa-star': mascota.isFavorite, 'fa-star-half-alt': !mascota.isFavorite}"></i>
                         {{mascota.isFavorite ? 'Quitar de Favoritos' : 'Agregar a Favoritos'}}
                       </button>
@@ -33,6 +33,13 @@
                         Iniciar Sesión
                       </button>                 
                     <a routerLink="/auth/login" *ngIf="!auth.isAuthenticated()" class="btn btn-primary me-2">Acceder para adoptar</a>
+
+                    <button *ngIf="isAdmin" class="btn btn-warning me-2">
+                        <i class="fas fa-edit"></i> Editar
+                      </button>
+                      <button *ngIf="isAdmin" class="btn btn-danger">
+                        <i class="fas fa-trash"></i> Eliminar
+                      </button>
                 </div>
             </div>
         </div>

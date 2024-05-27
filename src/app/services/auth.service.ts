@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, map } from 'rxjs';
+import { BehaviorSubject, Observable, map } from 'rxjs';
 import { environment } from '../environment/environment';
 import { ApiResponse } from '../models/ApiResponse';
 
@@ -9,6 +9,7 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   public api: string = `${environment.apiUrl}auth/`
+  private isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
   private extractData<T>(response:any): T{
     return response || {} as T;
   }
@@ -27,5 +28,14 @@ export class AuthService {
       return true;
     }
     return false;
+  }
+
+  public setAuthenticated(){
+    this.isAuthenticatedSubject.next(true);
+  }
+
+  public getUserProfile() : Observable<ApiResponse>{
+    return this.http.get<ApiResponse>(`${this.api}profile`)
+    .pipe(map(this.extractData<ApiResponse>));
   }
 }

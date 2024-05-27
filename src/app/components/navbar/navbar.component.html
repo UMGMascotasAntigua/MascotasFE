@@ -1,42 +1,37 @@
-<nav
-  class="navbar navbar-expand-lg bg-dark navbar-dark shadow-sm py-3 py-lg-0 px-3 px-lg-0"
->
+<nav class="navbar navbar-expand-lg bg-dark navbar-dark shadow-sm py-3 py-lg-0 px-3 px-lg-0">
   <a href="" class="navbar-brand d-block d-lg-none">
     <h1 class="m-0 text-uppercase text-white">
       <i class="fa fa-paw fs-1 text-primary me-3"></i>PetHope
     </h1>
   </a>
-  <button
-    class="navbar-toggler"
-    type="button"
-    data-bs-toggle="collapse"
-    data-bs-target="#navbarCollapse"
-  >
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarCollapse">
     <div class="navbar-nav ms-auto mx-lg-auto py-0">
-      <li *ngFor="let menu of menus" class="nav-item">
-        <ng-container *ngIf="menu.type === 'simple'; else dropdownTemplate">
-          <a
-        [routerLink]="menu.route"
-        routerLinkActive="active"
-        class="nav-item nav-link"
-        >{{ menu.name }}</a>
-        </ng-container>
-        <ng-template #dropdownTemplate>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              {{ menu.name }}
-            </a>
-            <ul class="dropdown-menu">
-              <li *ngFor="let child of menu.children">
-                <a class="dropdown-item" [routerLink]="child.route">{{child.name}}</a>
-              </li>
-            </ul>
+      <ng-container *ngFor="let menu of menus">
+        <ng-container *ngIf="menu.visible == true">
+          <li class="nav-item" *ngIf="menu.type === 'simple'; else dropdownTemplate">
+            <a [routerLink]="menu.route" routerLinkActive="active" class="nav-item nav-link">{{ menu.name }}</a>
           </li>
-        </ng-template>
-      </li>      
+          <ng-template #dropdownTemplate>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                {{ menu.name }}
+              </a>
+              <ul class="dropdown-menu">
+                <ng-container *ngFor="let child of menu.children">
+                  <ng-container *ngIf="child.visible == true">
+                    <li>
+                      <a class="dropdown-item" [routerLink]="child.route">{{ child.name }}</a>
+                    </li>
+                  </ng-container>
+                </ng-container>
+              </ul>
+            </li>
+          </ng-template>
+        </ng-container>
+      </ng-container>
     </div>
   </div>
 </nav>

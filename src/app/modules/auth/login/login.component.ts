@@ -32,9 +32,7 @@ export class LoginComponent {
       this.auth.doLogin(this.form.controls['email'].value, this.form.controls['password'].value)
       .subscribe((e) => {
         if(e.success == true){
-          this.toastr.success("Sesión iniciada con éxito", "Autenticación", {
-            timeOut: 3500
-          })
+          this.auth.setAuthenticated();
           localStorage.setItem('petsToken', e.result ?? "");
           this.router.navigate(['/main/home'])
           .then(() => {

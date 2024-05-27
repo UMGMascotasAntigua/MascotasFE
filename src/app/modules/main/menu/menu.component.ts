@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { PetsService } from 'src/app/services/pets.service';
 import {Pet} from '../../../models/Pet';
 import { environment } from 'src/app/environment/environment';
@@ -11,9 +11,12 @@ import Swal from 'sweetalert2';
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.css']
 })
-export class MenuComponent {
+export class MenuComponent implements OnInit{
   public mascotas: Pet[] = [];
   public photoEndpoint: string = `${environment.apiUrl}pet/photo/`;
+  public isAdmin: boolean = false;
+  public isUser: boolean = false;
+  userProfile: any;
   constructor(private petsService: PetsService, private toastr: ToastrService, public auth: AuthService){
 
     this.petsService.getPets()
@@ -27,6 +30,25 @@ export class MenuComponent {
       }
     });
   }
+
+  ngOnInit(): void {
+    if(this.auth.isAuthenticated()){
+      this.auth.getUserProfile().subscribe((e) => {
+        this.userProfile = e;
+        this.setRoleFlags()
+      }, error => {
+        this.toastr.error("Error al obtener el perfil del usuario", "Perfiles", {
+          timeOut: 4500
+        });
+      })
+    }
+  }
+
+  setRoleFlags(): void {
+    this.isAdmin = this.userProfile && this.userProfile.Perfil.Descripcion === 'Administrador';
+    this.isUser = this.userProfile && this.userProfile.Perfil.Descripcion === 'Usuario';
+  }
+
 
   adoption(pet: Pet){
     this.toastr.success("Adopción completa", "Adopción", {

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ClasificationService } from 'src/app/services/clasification.service';
 import { PetsService } from 'src/app/services/pets.service';
@@ -15,7 +16,8 @@ export class RegistroComponent {
   public imageUrl: string | null = null;
   public classifications: any[] = [];
   constructor(private fb: FormBuilder, private toast: ToastrService, private petService: PetsService,
-    private classificationService: ClasificationService
+    private classificationService: ClasificationService,
+    private router: Router
   ){
     this.registerPetForm = this.fb.group({
       name: ['', Validators.required],
@@ -52,7 +54,18 @@ export class RegistroComponent {
   savePet(){
     this.petService.addPet(this.registerPetForm.value, this.selectedFile)
     .subscribe((e) => {
-      console.log(e);
+      if(e.success == true){
+        this.toast.success(e.message ?? "Mascota agregada con éxito", "Registros", {
+          timeOut: 4500
+        });
+        this.registerPetForm.reset();
+        this.selectedFile = null;
+        this.router.navigate(['/main/pets'])
+      }else{
+        this.toast.error(e.message ?? "Error al guardar la mascota", "Registros", {
+          timeOut: 4500
+        })
+      }
     })
   }
 

@@ -66,7 +66,10 @@ export class HttpReqInterceptor implements HttpInterceptor {
                 text: 'Debe ingresar con sus credenciales para poder continuar con la navegación',
                 confirmButtonText: 'Cerrar'
               });
+              localStorage.clear();
+              this.router.navigate(['/auth/login'])
               break;
+              
             default:
               this.toast.warning(`Ocurrió un error inesperado: 
               Código: ${error.status}.`, "Error del sistema", {
