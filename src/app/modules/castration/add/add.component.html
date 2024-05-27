@@ -1,21 +1,21 @@
 <div class="container">
-    <form action="/submit-castration" method="post">
+    <form [formGroup]="addCastrationForm">
         <h2>Registro de Castración</h2>
         <div class="input-group">
             <label for="codigo_mascota">Mascota:</label>
-            <select id="codigo_mascota" name="codigo_mascota" required>
-                <option value="">Seleccione una mascota</option>
-                <!-- Opciones llenadas dinámicamente desde la base de datos -->
+            <select formControlName="pet" id="codigo_mascota" name="codigo_mascota" required>
+                <option value="" disabled selected>Seleccione una mascota</option>
+                <option *ngFor="let pet of pets" [value]="pet.Codigo_Mascota">{{ pet.Nombre_Mascota }}</option>
             </select>
         </div>
         <div class="input-group">
             <label for="fecha_castracion">Fecha de Castración:</label>
-            <input type="date" id="fecha_castracion" name="fecha_castracion" required>
+            <input formControlName="date" type="date" id="fecha_castracion" name="fecha_castracion" required>
         </div>
         <div class="input-group">
             <label for="comentarios">Comentarios:</label>
-            <textarea id="comentarios" name="comentarios"></textarea>
+            <textarea formControlName="comments" id="comentarios" name="comentarios"></textarea>
         </div>
-        <button type="submit">Registrar Castración</button>
+        <button [disabled]="!addCastrationForm.valid" (click)="addCastration()">Registrar Castración</button>
     </form>
 </div>

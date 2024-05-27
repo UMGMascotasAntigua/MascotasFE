@@ -59,7 +59,7 @@ export class NavbarComponent implements OnInit{
       },
       {
         name: 'Castración',
-        route: '/castracion',
+        route: '/castracion/add',
         type: 'simple'
       },
       {

@@ -35,4 +35,13 @@ export class PetsService {
     })
     .pipe(map(this.extractData<ApiResponse>))
   }
+
+  public addCastration(petCode: number, comments: string, date: Date) : Observable<ApiResponse>{
+    return this.http.patch<ApiResponse>(`${this.api}castration/add`, {
+      pet: Number(petCode),
+      comments: comments,
+      date: date
+    })
+    .pipe(map(this.extractData<ApiResponse>));
+  }
 }

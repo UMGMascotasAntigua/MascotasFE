@@ -11,7 +11,7 @@
 
 <div class="container">
     <h1 class="my-5">Mascotas Disponibles para Adopción</h1>
-    <div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="row row-cols-1 row-cols-md-3 g-4" *ngIf="mascotas && mascotas.length > 0">
         <div class="col" *ngFor="let mascota of mascotas">
             <div class="card">
                 <img [src]="photoEndpoint+mascota.Codigo_Mascota" class="card-img-top" [alt]="'Foto de ' + mascota.Nombre_Mascota">
@@ -36,6 +36,9 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="row" *ngIf="!mascotas || mascotas.length < 1">
+        <h3 style="text-align: center;">No hay mascotas disponibles</h3>
     </div>
 </div>
 
