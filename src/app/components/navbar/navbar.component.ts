@@ -28,6 +28,10 @@ export class NavbarComponent implements OnInit{
         type: 'dropdown',
         children: [
           {
+            name: 'Listado',
+            route: '/main/menu'
+          },
+          {
             name: 'Editar mascota',
             route: '/main/update'
           }
