@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { FormArray, FormBuilder, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { Form, FormArray, FormBuilder, Validators } from '@angular/forms';
 import { FormGroup, FormControl } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 
@@ -8,27 +8,83 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.css'],
 })
-export class SearchComponent {
+export class SearchComponent implements OnInit{
+  filterForm: FormGroup;
   query: string = '';
   searchForm: FormGroup;
-  cakes: any[] = [];
-  families: any[] = [];
-  fillings: any[] = [];
-  flavors: any[] = [];
-  filters: any[] = [];
 
   test: any = {};
   valueOpts: any[] = [];
   selectedCake: any = null;
 
   constructor(
-    private _fb: FormBuilder
+    private _fb: FormBuilder,
+    private toast: ToastrService
   ) {
     this.searchForm = this._fb.group({
       query: ['', Validators.required],
     });
 
+    this.filterForm = this._fb.group({
+      filters: this._fb.array([])
+    })
+    this.addFilter();
   
+  }
+
+  ngOnInit(): void {
+    
+  }
+
+  get filters(){
+    return this.filterForm.get('filters') as FormArray;
+  }
+
+  public createFilter() : FormGroup{
+    return this._fb.group({
+      field: ['', Validators.required],
+      operator: [''],
+      value: ['', Validators.required]
+    })
+  }
+
+  addFilter() : void{
+    const filters = this.filterForm.get('filters') as FormArray;
+  if (filters && filters.length > 0) {
+    const lastFilter = filters.at(filters.length - 1);
+    if (lastFilter.valid) {
+      filters.push(this.createFilter());
+    }else{
+      this.toast.error("Debe completar el filtro primero", "Filtro vacío", {
+        timeOut: 5000
+      })
+    }
+  } else {
+    // Si no hay filtros, simplemente agregamos uno nuevo
+    filters.push(this.createFilter());
+  }
+    
+  }
+
+  removeFilter(index: number){
+    if(this.filters.length > 1){
+      this.filters.removeAt(index);
+    }
+  }
+
+  submit(): void {
+    // this.clasificacionService.filtrarMascotas(this.filterForm.value).subscribe(data => {
+    //   console.log(data); // Aquí manejar los resultados del filtro
+    // });
+    const filters = this.filterForm.get('filters') as FormArray;
+  const filtrosValidos = filters.controls.filter(f => f.get('field')?.value !== '' && f.get('value')?.value !== '');
+  const filtros = filtrosValidos.map(f => ({
+    field: f.get('field')?.value,
+    operator: f.get('operator')?.value,
+    value: f.get('value')?.value
+  }));
+
+  console.log(filtros)
   }
 
   public addToCart(cake: any) {
@@ -36,12 +92,7 @@ export class SearchComponent {
   }
 
   public applyFilters() {
-    this.cakes = [];
-    // this.cakeService
-    //   .getFilteredCakes(this.filters)
-    //   .subscribe((e) => {
-    //     this.cakes = e.result;
-    //   });
+
   }
 
   public async parseQuery() {
@@ -66,7 +117,5 @@ export class SearchComponent {
         remainingInput = remainingInput.substring(matches.index + matches[0].length);
       }
     }
-
-    this.filters = filters
   }
 }

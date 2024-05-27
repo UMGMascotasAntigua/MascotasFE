@@ -6,15 +6,42 @@
                 <h1 class="font-secondary text-primary mb-4">Ingrese su filtro</h1>
                 <div class="d-flex align-items-center justify-content-center justify-content-lg-start pt-5">
                     <div class="container">
-                        <form [formGroup]="searchForm">
-                          <div class="col-auto">
-                            <label for="queryInput" class="visually-hidden">Ingrese su query</label>
-                            <input formControlName="query" (input)="parseQuery()"  type="text" class="form-control" id="queryInput" placeholder="Ejemplo: Horneado y sabor fresa y relleno (chocolate o arequipe)">
+                      <form [formGroup]="filterForm" (ngSubmit)="submit()">
+                        <div formArrayName="filters">
+                          <div *ngFor="let filter of filters.controls; let i=index" [formGroupName]="i">
+                            <select formControlName="field" class="form-select">
+                              <option value="raza">Raza</option>
+                              <option value="edad">Edad</option>
+                              <option value="estado">Estado</option>
+                              <option value="clasificacion">Clasificación</option>
+                            </select>
+                      
+                            <select formControlName="operator" class="form-select" *ngIf="filter.value.field === 'edad'">
+                              <option value="=">Igual</option>
+                              <option value=">=">Mayor o igual que</option>
+                              <option value="<=">Menor o igual que</option>
+                            </select>
+                      
+                            <input class="form-control" formControlName="value" *ngIf="filter.value.field !== 'estado' && filter.value.field !== 'clasificacion'"/>
+                      
+                            <select class="form-control" formControlName="value" *ngIf="filter.value.field === 'estado'">
+                              <option value="Adoptado">Adoptado</option>
+                              <option value="Disponible">Disponible</option>
+                            </select>
+                      
+                            <select class="form-control" formControlName="value" *ngIf="filter.value.field === 'clasificacion'">
+                              <option value="xd">
+                                
+                              </option>
+                            </select>
+                      
+                            <button type="button" class="btn btn-primary" (click)="addFilter()">+</button>
+                            <button type="button" class="btn btn-danger" (click)="removeFilter(i)" *ngIf="filters.length > 1">-</button>
                           </div>
-                          <div class="col-auto">
-                            <button type="submit" autocomplete="false" (click)="applyFilters()" class="btn btn-primary mb-3" [disabled]="!searchForm.valid">Buscar</button>
-                          </div>
-                        </form>
+                        </div>
+                        <button type="submit" class="btn btn-success">Filtrar</button>
+                      </form>
+                      
                     </div>
                 </div>
             </div>
@@ -22,7 +49,7 @@
     </div>
   </div>
 
-  <div class="container-fluid about py-5" *ngIf="cakes && cakes.length > 0">
+  <!-- <div class="container-fluid about py-5" *ngIf="cakes && cakes.length > 0">
     <div class="container">
         <div class="section-title position-relative text-center mx-auto mb-5 pb-3" style="max-width: 600px;">
             <h2 class="text-primary font-secondary">Resultados de la búsqueda:</h2>
@@ -73,7 +100,7 @@
             <h1 class="display-4 text-uppercase">No se encontraron pasteles con esos filtros</h1>
         </div>
     </div>
-  </div>
+  </div> -->
 
 
   <div *ngIf="selectedCake" class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

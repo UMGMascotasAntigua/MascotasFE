@@ -1,1 +1,44 @@
-<p>update works!</p>
+
+    <title>Editar Mascota</title>
+
+
+    <div class="container">
+        <form id="editMascotaForm" action="submit_edit_mascota.php" method="post">
+            <h2>Editar Mascota</h2>
+            <div class="input-group">
+                <label for="codigo_mascota">Código de Mascota:</label>
+                <select id="codigo_mascota" name="codigo_mascota" onchange="cargarDatosMascota(this.value)" required>
+                    <option value="">Seleccione una mascota</option>
+                    <!-- Opciones llenadas dinámicamente desde la base de datos -->
+                </select>
+            </div>
+            <div class="input-group">
+                <label for="nombre_mascota">Nombre:</label>
+                <input type="text" id="nombre_mascota" name="nombre_mascota" required>
+            </div>
+            <div class="input-group">
+                <label for="raza">Raza:</label>
+                <input type="text" id="raza" name="raza" required>
+            </div>
+            <div class="input-group">
+                <label for="edad">Edad:</label>
+                <input type="text" id="edad" name="edad" required>
+            </div>
+            <div class="input-group">
+                <label for="estado">Estado:</label>
+                <input type="text" id="estado" name="estado" required>
+            </div>
+            <div class="input-group">
+                <label for="informacion">Información:</label>
+                <textarea id="informacion" name="informacion"></textarea>
+            </div>
+            <div class="input-group">
+                <label for="comentarios">Comentarios:</label>
+                <textarea id="comentarios" name="comentarios"></textarea>
+            </div>
+            <button type="submit">Actualizar Mascota</button>
+        </form>
+    </div>
+
+
+

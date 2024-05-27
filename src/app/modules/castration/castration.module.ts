@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 
 import { CastrationRoutingModule } from './castration-routing.module';
 import { AddComponent } from './add/add.component';
+import { PetsService } from 'src/app/services/pets.service';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -11,7 +13,9 @@ import { AddComponent } from './add/add.component';
   ],
   imports: [
     CommonModule,
-    CastrationRoutingModule
-  ]
+    CastrationRoutingModule,
+    ReactiveFormsModule
+  ],
+  providers: [PetsService]
 })
 export class CastrationModule { }

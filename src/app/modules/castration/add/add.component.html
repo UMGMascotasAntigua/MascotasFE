@@ -1,1 +1,21 @@
-<p>add works!</p>
+<div class="container">
+    <form [formGroup]="addCastrationForm">
+        <h2>Registro de Castración</h2>
+        <div class="input-group">
+            <label for="codigo_mascota">Mascota:</label>
+            <select formControlName="pet" id="codigo_mascota" name="codigo_mascota" required>
+                <option value="" disabled selected>Seleccione una mascota</option>
+                <option *ngFor="let pet of pets" [value]="pet.Codigo_Mascota">{{ pet.Nombre_Mascota }}</option>
+            </select>
+        </div>
+        <div class="input-group">
+            <label for="fecha_castracion">Fecha de Castración:</label>
+            <input formControlName="date" type="date" id="fecha_castracion" name="fecha_castracion" required>
+        </div>
+        <div class="input-group">
+            <label for="comentarios">Comentarios:</label>
+            <textarea formControlName="comments" id="comentarios" name="comentarios"></textarea>
+        </div>
+        <button [disabled]="!addCastrationForm.valid" (click)="addCastration()">Registrar Castración</button>
+    </form>
+</div>

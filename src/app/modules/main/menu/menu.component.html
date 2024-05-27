@@ -11,7 +11,7 @@
 
 <div class="container">
     <h1 class="my-5">Mascotas Disponibles para Adopción</h1>
-    <div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="row row-cols-1 row-cols-md-3 g-4" *ngIf="mascotas && mascotas.length > 0">
         <div class="col" *ngFor="let mascota of mascotas">
             <div class="card">
                 <img [src]="photoEndpoint+mascota.Codigo_Mascota" class="card-img-top" [alt]="'Foto de ' + mascota.Nombre_Mascota">
@@ -26,13 +26,19 @@
                         <i class="fas fa-paw"></i> Adoptar
                     </button>
                     <button *ngIf="auth.isAuthenticated()" class="btn btn-outline-danger favorite-btn" (click)="toggleFavorite(mascota)">
-                        <i class="fas" [ngClass]="{'fa-star': mascota.Favoritos, 'fa-star-half-alt': !mascota.Favoritos}"></i>
-                        {{mascota.Favoritos ? 'Quitar de Favoritos' : 'Agregar a Favoritos'}}
-                    </button>                    
+                        <i class="fas" [ngClass]="{'fa-star': mascota.isFavorite, 'fa-star-half-alt': !mascota.isFavorite}"></i>
+                        {{mascota.isFavorite ? 'Quitar de Favoritos' : 'Agregar a Favoritos'}}
+                      </button>
+                      <button *ngIf="!auth.isAuthenticated()" class="btn btn-primary" >
+                        Iniciar Sesión
+                      </button>                 
                     <a routerLink="/auth/login" *ngIf="!auth.isAuthenticated()" class="btn btn-primary me-2">Acceder para adoptar</a>
                 </div>
             </div>
         </div>
+    </div>
+    <div class="row" *ngIf="!mascotas || mascotas.length < 1">
+        <h3 style="text-align: center;">No hay mascotas disponibles</h3>
     </div>
 </div>
 

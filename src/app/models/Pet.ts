@@ -28,6 +28,7 @@ export class Pet {
     Castraciones: Castracion[];
     Favoritos: Favorito[];
     CitasDet: CitaDet[];
+    isFavorite: boolean = false;
 
     // Constructor para inicializar las propiedades de la clase
     constructor(
