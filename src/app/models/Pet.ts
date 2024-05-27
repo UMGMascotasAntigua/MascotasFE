@@ -1,9 +1,32 @@
 export class VacunaDet {
     // Define los campos de VacunaDet si es necesario
+    public Fecha_Aplicacion: Date;
+    public Vacuna: Vacuna;
+
+    constructor(fecha: Date, Vacuna: Vacuna){
+        this.Fecha_Aplicacion = fecha;
+        this.Vacuna = Vacuna;
+    }
+}
+
+export class Vacuna{
+    public Comentarios: string;
+    public Nombre_Vacuna: string;
+
+    constructor(comments: string, name: string){
+        this.Comentarios = comments;
+        this.Nombre_Vacuna = name;
+    }
 }
 
 export class Castracion {
     // Define los campos de Castracion si es necesario
+    public Comentarios: string;
+    public Fecha_Castracion: Date;
+    constructor(Comentarios: string, fecha_castr: Date){
+        this.Comentarios = Comentarios;
+        this.Fecha_Castracion = fecha_castr;
+    }
 }
 
 export class Favorito {
@@ -24,7 +47,7 @@ export class Pet {
     Foto: string;
     Informacion: string;
     Comentarios: string;
-    VacunasDet: VacunaDet[];
+    Vacunas_Det: VacunaDet[];
     Castraciones: Castracion[];
     Favoritos: Favorito[];
     CitasDet: CitaDet[];
@@ -53,7 +76,7 @@ export class Pet {
         this.Foto = Foto;
         this.Informacion = Informacion;
         this.Comentarios = Comentarios;
-        this.VacunasDet = VacunasDet;
+        this.Vacunas_Det = VacunasDet;
         this.Castraciones = Castraciones;
         this.Favoritos = Favoritos;
         this.CitasDet = CitasDet;

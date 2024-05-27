@@ -22,6 +22,20 @@
                     <p class="card-text"><strong>Estado:</strong> {{ mascota.Estado }}</p>
                     <p class="card-text"><strong>Información:</strong> {{ mascota.Informacion }}</p>
                     <p class="card-text"><strong>Comentarios:</strong> {{ mascota.Comentarios }}</p>
+                    <hr />
+                    <p class="text-center" *ngIf="mascota.Castraciones.length > 0 && mascota.Vacunas_Det.length > 0">Salud de la mascota</p>
+                    <div *ngIf="mascota.Castraciones && mascota.Castraciones.length > 0">
+                        <h6>Castraciones:</h6>
+                        <div *ngFor="let castracion of mascota.Castraciones">
+                            <p>{{ castracion.Fecha_Castracion | date:'dd MMMM yyyy':'es' }}</p>
+                        </div>
+                    </div>
+                    <div *ngIf="mascota.Vacunas_Det && mascota.Vacunas_Det.length > 0">
+                        <h6>Vacunas:</h6>
+                        <div *ngFor="let vacunaDet of mascota.Vacunas_Det">
+                            <p>{{ vacunaDet.Vacuna.Nombre_Vacuna }} - {{ vacunaDet.Fecha_Aplicacion | date:'dd MMMM yyyy':'es' }}</p>
+                        </div>
+                    </div>
                     <button *ngIf="auth.isAuthenticated() && mascota.Estado === 'Disponible' && isUser" class="btn btn-primary me-2" (click)="adoption(mascota)">
                         <i class="fas fa-paw"></i> Adoptar
                     </button>
