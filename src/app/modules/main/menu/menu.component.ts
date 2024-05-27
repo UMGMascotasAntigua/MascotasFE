@@ -57,14 +57,12 @@ export class MenuComponent {
   }
 
   toggleFavorite(mascota: any): void {
-    mascota.Favoritos = !mascota.Favoritos;
-    if (mascota.Favoritos) {
-      // Lógica para agregar a favoritos
-      this.addToFavorites(mascota);
-    } else {
-      // Lógica para quitar de favoritos
-      this.removeFromFavorites(mascota);
-    }
+    const val = mascota.isFavorite;
+    mascota.isFavorite = !mascota.isFavorite;
+    this.addToFavorites(mascota);
+    // if(mascota.isFavorite == false){
+    //   this.addToFavorites(mascota)
+    // }
   }
 
   removeFromFavorites(pet: any){

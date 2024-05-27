@@ -11,11 +11,6 @@ import { ToastrService } from 'ngx-toastr';
 export class SearchComponent {
   query: string = '';
   searchForm: FormGroup;
-  cakes: any[] = [];
-  families: any[] = [];
-  fillings: any[] = [];
-  flavors: any[] = [];
-  filters: any[] = [];
 
   test: any = {};
   valueOpts: any[] = [];
@@ -36,12 +31,7 @@ export class SearchComponent {
   }
 
   public applyFilters() {
-    this.cakes = [];
-    // this.cakeService
-    //   .getFilteredCakes(this.filters)
-    //   .subscribe((e) => {
-    //     this.cakes = e.result;
-    //   });
+
   }
 
   public async parseQuery() {
@@ -66,7 +56,5 @@ export class SearchComponent {
         remainingInput = remainingInput.substring(matches.index + matches[0].length);
       }
     }
-
-    this.filters = filters
   }
 }
