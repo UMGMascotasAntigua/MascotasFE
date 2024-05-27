@@ -1,1 +1,21 @@
-<p>add works!</p>
+<div class="container">
+    <form action="/submit-castration" method="post">
+        <h2>Registro de Castración</h2>
+        <div class="input-group">
+            <label for="codigo_mascota">Mascota:</label>
+            <select id="codigo_mascota" name="codigo_mascota" required>
+                <option value="">Seleccione una mascota</option>
+                <!-- Opciones llenadas dinámicamente desde la base de datos -->
+            </select>
+        </div>
+        <div class="input-group">
+            <label for="fecha_castracion">Fecha de Castración:</label>
+            <input type="date" id="fecha_castracion" name="fecha_castracion" required>
+        </div>
+        <div class="input-group">
+            <label for="comentarios">Comentarios:</label>
+            <textarea id="comentarios" name="comentarios"></textarea>
+        </div>
+        <button type="submit">Registrar Castración</button>
+    </form>
+</div>

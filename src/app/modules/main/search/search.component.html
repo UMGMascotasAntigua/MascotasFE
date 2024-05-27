@@ -9,7 +9,7 @@
                         <form [formGroup]="searchForm">
                           <div class="col-auto">
                             <label for="queryInput" class="visually-hidden">Ingrese su query</label>
-                            <input formControlName="query" (input)="parseQuery()"  type="text" class="form-control" id="queryInput" placeholder="Ejemplo: Horneado y sabor fresa y relleno (chocolate o arequipe)">
+                            <input formControlName="query" (input)="parseQuery()"  type="text" class="form-control" id="queryInput" placeholder="Perrito">
                           </div>
                           <div class="col-auto">
                             <button type="submit" autocomplete="false" (click)="applyFilters()" class="btn btn-primary mb-3" [disabled]="!searchForm.valid">Buscar</button>
