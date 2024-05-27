@@ -29,7 +29,7 @@ export class NavbarComponent implements OnInit{
         children: [
           {
             name: 'Listado',
-            route: '/main/menu'
+            route: '/main/pets'
           },
           {
             name: 'Editar mascota',
