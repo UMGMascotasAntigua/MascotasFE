@@ -1,24 +1,25 @@
 <div class="container">
-    <form action="/submit-vaccine-detail" method="post">
+    <form [formGroup]="addVaccinationForm">
         <h2>Detalle de Vacunación</h2>
         <div class="input-group">
             <label for="codigo_mascota">Mascota:</label>
-            <select id="codigo_mascota" name="codigo_mascota" required>
-                <!-- Opciones llenadas dinámicamente desde la base de datos -->
-                <option value="">Seleccione una mascota</option>
+            <select id="codigo_mascota" name="codigo_mascota" formControlName="pet">
+                <option value="" disabled selected>Seleccione una mascota</option>
+                <option [value]="pet.Codigo_Mascota" *ngFor="let pet of pets">{{ pet.Nombre_Mascota }}</option>
             </select>
         </div>
         <div class="input-group">
             <label for="codigo_vacuna">Vacuna:</label>
-            <select id="codigo_vacuna" name="codigo_vacuna" required>
+            <select id="codigo_vacuna" name="codigo_vacuna" formControlName="vaccine">
                 <!-- Opciones llenadas dinámicamente desde la base de datos -->
-                <option value="">Seleccione una vacuna</option>
+                <option value="" disabled selected>Seleccione una vacuna</option>
+                <option [value]="vaccine.Codigo_Vacuna" *ngFor="let vaccine of vaccines">{{ vaccine.Nombre_Vacuna }}</option>
             </select>
         </div>
         <div class="input-group">
             <label for="fecha_aplicacion">Fecha de Aplicación:</label>
-            <input type="date" id="fecha_aplicacion" name="fecha_aplicacion" required>
+            <input formControlName="date" type="date" id="fecha_aplicacion" name="fecha_aplicacion" required>
         </div>
-        <button type="submit">Registrar Detalle</button>
+        <button (click)="registerVaccine()" type="submit" [disabled]="!addVaccinationForm.valid">Registrar Detalle</button>
     </form>
 </div>

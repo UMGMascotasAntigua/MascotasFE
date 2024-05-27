@@ -11,6 +11,7 @@ import { HttpReqInterceptor } from './interceptors/HttpInterceptor';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { AuthService } from './services/auth.service';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
       useClass: HttpReqInterceptor,
       multi: true
     },
+    AuthService
   ],
   bootstrap: [AppComponent]
 })

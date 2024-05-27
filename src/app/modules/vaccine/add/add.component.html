@@ -1,14 +1,14 @@
 <div class="container">
-    <form action="/submit-vaccine" method="post">
+    <form [formGroup]="addVaccineForm">
         <h2>Registro de Vacunas</h2>
         <div class="input-group">
             <label for="nombre_vacuna">Nombre de la vacuna:</label>
-            <input type="text" id="nombre_vacuna" name="nombre_vacuna" required>
+            <input formControlName="name" type="text" id="nombre_vacuna" name="nombre_vacuna">
         </div>
         <div class="input-group">
             <label for="comentarios">Comentarios:</label>
-            <textarea id="comentarios" name="comentarios"></textarea>
+            <textarea formControlName="comments" id="comentarios" name="comentarios"></textarea>
         </div>
-        <button type="submit">Registrar Vacuna</button>
+        <button (click)="addVaccine()" >Registrar Vacuna</button>
     </form>
 </div>

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { authGuard } from './guards/auth.guard';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -19,6 +19,7 @@ const routes: Routes = [
   {
     path: 'vacunas',
     loadChildren: () => import('./modules/vaccine/vaccine.module').then(m => m.VaccineModule),
+    canActivate: [AuthGuard]
   },
 ];
 

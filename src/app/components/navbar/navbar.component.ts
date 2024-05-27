@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -14,7 +15,7 @@ export class NavbarComponent implements OnInit{
       // this.router.events.subscribe((e) =)
   }
 
-  constructor(private router: Router, private toast: ToastrService){
+  constructor(private router: Router, private toast: ToastrService, private auth: AuthService){
     this.menus = [
       {
         name: 'Inicio',
@@ -47,8 +48,8 @@ export class NavbarComponent implements OnInit{
         ]
       },
       {
-        name: 'Iniciar sesión',
-        route: '/auth/login',
+        name: auth.isAuthenticated() ? "Mi cuenta" : "Iniciar sesión",
+        route: auth.isAuthenticated() ? "/auth/account" : "/auth/login",
         type: 'simple'
       }
     ]
@@ -56,11 +57,5 @@ export class NavbarComponent implements OnInit{
 
   get items():any[]{
     return [];
-  }
-
-  public payCart(){
-    this.toast.success("Orden pagada con éxito", "Pagos", {
-      timeOut: 5000
-    })
   }
 }

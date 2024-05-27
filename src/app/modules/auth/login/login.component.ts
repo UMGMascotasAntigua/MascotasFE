@@ -18,7 +18,7 @@ export class LoginComponent {
     private router: Router
   ){
     this.form = this._fb.group({
-      email: ['', Validators.compose([Validators.required, Validators.email])],
+      email: ['', Validators.required],
       password: ['', Validators.required]
     })
   }
@@ -37,6 +37,9 @@ export class LoginComponent {
           });
           localStorage.setItem('petsToken', e.result ?? "");
           this.router.navigate(['/main/home'])
+          .then(() => {
+            window.location.reload()
+          })
         }else{
           this.toastr.error(e.message ?? "Error de autenticación", "Autenticación", {
             timeOut: 4500

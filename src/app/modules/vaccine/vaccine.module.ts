@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import { VaccineRoutingModule } from './vaccine-routing.module';
 import { AddComponent } from './add/add.component';
 import { AddPetComponent } from './add-pet/add-pet.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { PetsService } from 'src/app/services/pets.service';
 
 
 @NgModule({
@@ -13,7 +15,9 @@ import { AddPetComponent } from './add-pet/add-pet.component';
   ],
   imports: [
     CommonModule,
-    VaccineRoutingModule
-  ]
+    VaccineRoutingModule,
+    ReactiveFormsModule
+  ],
+  providers: [PetsService]
 })
 export class VaccineModule { }

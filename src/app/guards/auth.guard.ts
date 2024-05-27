@@ -1,17 +1,30 @@
-import { CanActivateFn, Router } from '@angular/router';
+import { Injectable } from '@angular/core';
+import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { Observable } from 'rxjs';
+import { AuthService } from '../services/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
-export const authGuard: CanActivateFn = (route, state) => {
-  console.log('inicia guard')
-  const router = new Router();
-  const token = localStorage.getItem('pettoken') ?? "";
-  console.log('verifica guard')
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthGuard implements CanActivate {
 
-  if(token !== null && token !== ''){
-    console.log('si hay token')
-    console.log(token)
-    return true;
+  constructor(private authService: AuthService, private router: Router,
+    private toast: ToastrService
+  ) {}
+
+  canActivate(
+    next: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+    if (this.authService.isAuthenticated()) {
+      return true;
+    } else {
+      this.toast.error("No ha iniciado sesión, no tiene acceso a este módulo. Primero inicie sesión", "Acceso", {
+        timeOut: 5500
+      })
+      this.router.navigate(['/auth/login']);
+      return false;
+    }
   }
-  console.log('no hay token')
-  router.navigate(['/auth/login'])
-  return false;
-};
+}
