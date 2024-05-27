@@ -13,6 +13,8 @@ import { CartComponent } from './cart/cart.component';
 import { PetsService } from 'src/app/services/pets.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { UpdateComponent } from './update/update.component';
+import { RegistroComponent } from './registro/registro.component';
+import { ClasificationService } from 'src/app/services/clasification.service';
 
 
 @NgModule({
@@ -22,7 +24,8 @@ import { UpdateComponent } from './update/update.component';
     SearchComponent,
     CreateComponent,
     CartComponent,
-    UpdateComponent
+    UpdateComponent,
+    RegistroComponent
   ],
   imports: [
     CommonModule,
@@ -34,7 +37,8 @@ import { UpdateComponent } from './update/update.component';
   ],
   providers: [
     PetsService,
-    AuthService
+    AuthService,
+    ClasificationService
   ]
 })
 export class MainModule { }

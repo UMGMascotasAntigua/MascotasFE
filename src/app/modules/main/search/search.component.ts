@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Form, FormArray, FormBuilder, Validators } from '@angular/forms';
 import { FormGroup, FormControl } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { PetsService } from 'src/app/services/pets.service';
 
 @Component({
   selector: 'app-search',
@@ -19,7 +20,8 @@ export class SearchComponent implements OnInit{
 
   constructor(
     private _fb: FormBuilder,
-    private toast: ToastrService
+    private toast: ToastrService,
+    private petService: PetsService
   ) {
     this.searchForm = this._fb.group({
       query: ['', Validators.required],
@@ -84,7 +86,10 @@ export class SearchComponent implements OnInit{
     value: f.get('value')?.value
   }));
 
-  console.log(filtros)
+  this.petService.filterPets(filtros)
+  .subscribe((e) => {
+    console.log(e)
+  })
   }
 
   public addToCart(cake: any) {

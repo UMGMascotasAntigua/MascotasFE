@@ -58,3 +58,14 @@
     cursor: not-allowed;
   }
   
+
+  .input-group input[type="date"],
+.input-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fafafa;
+    -webkit-appearance: none; /* Removes default styling of select in WebKit browsers */
+    -moz-appearance: none;    /* Removes default styling of select in Firefox */
+}

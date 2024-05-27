@@ -6,12 +6,17 @@ import { SearchComponent } from './search/search.component';
 import { CreateComponent } from './create/create.component';
 import { CartComponent } from './cart/cart.component';
 import { UpdateComponent } from './update/update.component';
+import { RegistroComponent } from './registro/registro.component';
 
 const routes: Routes = [
   {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
+  },
+  {
+    path: 'add',
+    component: RegistroComponent
   },
   {
     path: 'home',

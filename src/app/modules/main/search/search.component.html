@@ -7,40 +7,46 @@
                 <div class="d-flex align-items-center justify-content-center justify-content-lg-start pt-5">
                     <div class="container">
                       <form [formGroup]="filterForm" (ngSubmit)="submit()">
-                        <div formArrayName="filters">
-                          <div *ngFor="let filter of filters.controls; let i=index" [formGroupName]="i">
-                            <select formControlName="field" class="form-select">
+                        <div class="row" formArrayName="filters">
+                          <div *ngFor="let filter of filters.controls; let i=index" [formGroupName]="i" class="col-3 mb-3">
+                            <select formControlName="field" class="form-select mb-2">
                               <option value="raza">Raza</option>
                               <option value="edad">Edad</option>
                               <option value="estado">Estado</option>
                               <option value="clasificacion">Clasificación</option>
                             </select>
                       
-                            <select formControlName="operator" class="form-select" *ngIf="filter.value.field === 'edad'">
+                            <select formControlName="operator" class="form-select mb-2" *ngIf="filter.value.field === 'edad'">
                               <option value="=">Igual</option>
+                              <option value=">">Mayor que</option>
+                              <option value="<">Menor que</option>
                               <option value=">=">Mayor o igual que</option>
                               <option value="<=">Menor o igual que</option>
                             </select>
                       
-                            <input class="form-control" formControlName="value" *ngIf="filter.value.field !== 'estado' && filter.value.field !== 'clasificacion'"/>
+                            <input class="form-control mb-2" formControlName="value" *ngIf="filter.value.field !== 'estado' && filter.value.field !== 'clasificacion'"/>
                       
-                            <select class="form-control" formControlName="value" *ngIf="filter.value.field === 'estado'">
+                            <select class="form-select mb-2" formControlName="value" *ngIf="filter.value.field === 'estado'">
                               <option value="Adoptado">Adoptado</option>
                               <option value="Disponible">Disponible</option>
                             </select>
                       
-                            <select class="form-control" formControlName="value" *ngIf="filter.value.field === 'clasificacion'">
-                              <option value="xd">
-                                
-                              </option>
+                            <select class="form-select mb-2" formControlName="value" *ngIf="filter.value.field === 'clasificacion'">
+                              <option value="Perro">Perro</option>
+                              <option value="Gato">Gato</option>
                             </select>
                       
-                            <button type="button" class="btn btn-primary" (click)="addFilter()">+</button>
-                            <button type="button" class="btn btn-danger" (click)="removeFilter(i)" *ngIf="filters.length > 1">-</button>
+                            <div class="d-flex justify-content-between">
+                              <button type="button" class="btn btn-primary me-2" (click)="addFilter()">+</button>
+                              <button type="button" class="btn btn-danger" (click)="removeFilter(i)" *ngIf="filters.length > 1">-</button>
+                            </div>
                           </div>
                         </div>
-                        <button type="submit" class="btn btn-success">Filtrar</button>
+                        <div class="d-flex justify-content-end">
+                          <button type="submit" class="btn btn-success">Filtrar</button>
+                        </div>
                       </form>
+                      
                       
                     </div>
                 </div>

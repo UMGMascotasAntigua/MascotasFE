@@ -34,7 +34,7 @@ export class LoginComponent {
         if(e.success == true){
           this.toastr.success("Sesión iniciada con éxito", "Autenticación", {
             timeOut: 3500
-          });
+          })
           localStorage.setItem('petsToken', e.result ?? "");
           this.router.navigate(['/main/home'])
           .then(() => {

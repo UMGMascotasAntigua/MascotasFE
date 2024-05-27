@@ -1,36 +1,64 @@
-<div class="container">
-      <h2>Registro de Mascota</h2>
-      
-      <div class="input-group">
-        <label for="raza">Raza</label>
-        <input type="text" id="raza" formControlName="raza" required>
+<form [formGroup]="registerPetForm">
+  <div class="container">
+    <h2>Registro de Mascota</h2>
+    
+    <div class="input-group">
+      <label for="name">Nombre</label>
+      <input type="text" id="name" formControlName="name" required>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <div class="input-group">
+          <label for="raza">Raza</label>
+          <input type="text" id="raza" formControlName="race" required>
+        </div>
       </div>
-      
-      <div class="input-group">
-        <label for="edad">Edad</label>
-        <input type="number" id="edad" formControlName="edad" required>
+      <div class="col">
+        <div class="input-group">
+          <label for="edad">Edad</label>
+          <input type="number" id="edad" formControlName="age" required>
+        </div>
       </div>
-      
-      <div class="input-group">
-        <label for="estado">Estado</label>
-        <input type="text" id="estado" formControlName="estado" required>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <div class="input-group">
+          <label for="estado">Clasificación</label>
+          <select id="estado" class="form-control" formControlName="clasification">
+            <option selected disabled value="">Seleccione una clasificación</option>
+            <option *ngFor="let clasification of classifications" [value]="clasification.Codigo_Clasificacion">{{ clasification.Descripcion }}</option>
+          </select>
+        </div>
       </div>
-      
-      <div class="input-group">
-        <label for="foto">Foto</label>
-        <input type="file" id="foto" (change)="RegistroComponent($event)" required>
+      <div class="col">
+        <div class="input-group">
+          <label for="foto">Foto</label>
+          <input type="file" id="foto" (change)="onFileSelected($event)" accept="image/*" required>
+        </div>
       </div>
-      
-      <div class="input-group">
-        <label for="informacion">Información</label>
-        <textarea id="informacion" formControlName="informacion" required></textarea>
+    </div>
+
+    <div class="row" *ngIf="imageUrl">
+      <img [src]="imageUrl" alt="Vista previa de la imagen">
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <div class="input-group">
+          <label for="informacion">Información</label>
+          <textarea id="informacion" formControlName="information" required></textarea>
+        </div>
       </div>
-      
-      <div class="input-group">
-        <label for="comentarios">Comentarios</label>
-        <textarea id="comentarios" formControlName="comentarios" required></textarea>
+      <div class="col">
+        <div class="input-group">
+          <label for="comentarios">Comentarios</label>
+          <textarea id="comentarios" formControlName="comments" required></textarea>
+        </div>    
       </div>
-      
-      <button type="submit" [disabled]="!registerPetForm.valid">Registrar Mascota</button>
-  </div>
+    </div>
+    <button [disabled]="!registerPetForm.valid" (click)="savePet()">Registrar Mascota</button>
+</div>
+</form>
   
