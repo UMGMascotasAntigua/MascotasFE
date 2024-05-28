@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -12,8 +12,10 @@ import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { AuthService } from './services/auth.service';
-import { RouterModule } from '@angular/router';
+import { registerLocaleData } from '@angular/common';
+import localeEs from '@angular/common/locales/es';
 
+registerLocaleData(localeEs, 'es');
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,6 +53,10 @@ import { RouterModule } from '@angular/router';
     HttpClientModule
   ],
   providers: [
+    {
+      provide: LOCALE_ID,
+      useValue: 'es'
+    },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpReqInterceptor,
