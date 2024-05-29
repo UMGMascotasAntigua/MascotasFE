@@ -26,17 +26,27 @@
                     <p class="text-center" *ngIf="mascota.Castraciones.length > 0 && mascota.Vacunas_Det.length > 0">Salud de la mascota</p>
                     <div *ngIf="mascota.Castraciones && mascota.Castraciones.length > 0">
                         <h6>Castraciones:</h6>
-                        <div *ngFor="let castracion of mascota.Castraciones">
-                            <p>{{ castracion.Fecha_Castracion | date:'dd MMMM yyyy':'es' }}</p>
+                        <div *ngFor="let castracion of mascota.Castraciones; let i = index">
+                            <p>
+                                {{ castracion.Fecha_Castracion | date:'dd MMMM yyyy':'es' }}
+                                <button *ngIf="isAdmin" (click)="deleteCastration(mascota, i)" class="btn btn-icon">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </p>
                         </div>
                     </div>
                     <div *ngIf="mascota.Vacunas_Det && mascota.Vacunas_Det.length > 0">
                         <h6>Vacunas:</h6>
-                        <div *ngFor="let vacunaDet of mascota.Vacunas_Det">
-                            <p>{{ vacunaDet.Vacuna.Nombre_Vacuna }} - {{ vacunaDet.Fecha_Aplicacion | date:'dd MMMM yyyy':'es' }}</p>
+                        <div *ngFor="let vacunaDet of mascota.Vacunas_Det; let i = index">
+                            <p>
+                                {{ vacunaDet.Vacuna.Nombre_Vacuna }} - {{ vacunaDet.Fecha_Aplicacion | date:'dd MMMM yyyy':'es' }}
+                                <button *ngIf="isAdmin" (click)="deleteVaccine(mascota, i)" class="btn btn-icon">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </p>
                         </div>
                     </div>
-                    <button *ngIf="auth.isAuthenticated() && mascota.Estado === 'Disponible' && isUser" class="btn btn-primary me-2" (click)="adoption(mascota)">
+                    <button *ngIf="auth.isAuthenticated() && mascota.Estado === 'Disponible' && isUser" class="btn btn-primary me-2" (click)="adoptPet(mascota)">
                         <i class="fas fa-paw"></i> Adoptar
                     </button>
                     <button *ngIf="auth.isAuthenticated() && isUser" class="btn btn-outline-danger favorite-btn" (click)="toggleFavorite(mascota)">
@@ -48,10 +58,10 @@
                       </button>                 
                     <a routerLink="/auth/login" *ngIf="!auth.isAuthenticated()" class="btn btn-primary me-2">Acceder para adoptar</a>
 
-                    <button *ngIf="isAdmin" class="btn btn-warning me-2">
+                    <a *ngIf="isAdmin" class="btn btn-warning me-2" routerLink="/main/update/{{mascota.Codigo_Mascota}}">
                         <i class="fas fa-edit"></i> Editar
-                      </button>
-                      <button *ngIf="isAdmin" class="btn btn-danger">
+                    </a>
+                      <button *ngIf="isAdmin" class="btn btn-danger" (click)="deletePet(mascota)">
                         <i class="fas fa-trash"></i> Eliminar
                       </button>
                 </div>

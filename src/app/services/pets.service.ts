@@ -45,6 +45,25 @@ export class PetsService {
     .pipe(map(this.extractData<ApiResponse>));
   }
 
+  public deleteCastration(castration: number, pet: number) : Observable<ApiResponse>{
+    return this.http.delete<ApiResponse>(`${this.api}castration/delete`, {
+      body: {
+        Codigo_Castracion: castration,
+        Codigo_Mascota: pet
+      }
+    })
+    .pipe(map(this.extractData<ApiResponse>));
+  }
+
+  public deleteVaccine(codigo_mvd: number) : Observable<ApiResponse>{
+    return this.http.delete<ApiResponse>(`${this.api}vaccines/delete`, {
+      body: {
+        mvd: codigo_mvd
+      }
+    })
+    .pipe(map(this.extractData<ApiResponse>));
+  }
+
   public filterPets(filters: any[]) : Observable<ApiResponse>{
     return this.http.post<ApiResponse>(`${this.api}filter`, {
       filters: filters
@@ -66,6 +85,16 @@ export class PetsService {
     headers.append("Content-Type", "multipart/form-data");
 
     return this.http.post(this.api, formData, {headers})
+    .pipe(map(this.extractData<ApiResponse>));
+  }
+
+  public deletePet(id: number):  Observable<ApiResponse>{
+    return this.http.delete<ApiResponse>(`${this.api}${id}`)
+    .pipe(map(this.extractData<ApiResponse>));
+  }
+
+  public updatePet(id: number, update: object):  Observable<ApiResponse>{
+    return this.http.patch<ApiResponse>(`${this.api}${id}`, update)
     .pipe(map(this.extractData<ApiResponse>));
   }
 }

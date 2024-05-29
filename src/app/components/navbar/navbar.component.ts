@@ -62,7 +62,7 @@ export class NavbarComponent implements OnInit{
           },
           {
             name: 'Editar mascota',
-            route: '/main/update',
+            route: '/main/update/',
             visible: isAdmin
           }
         ]
@@ -97,11 +97,30 @@ export class NavbarComponent implements OnInit{
         type: 'simple',
         visible: isAdmin
       },
-      {
-        name: this.auth.isAuthenticated() ? "Mi cuenta" : "Iniciar sesión",
-        route: this.auth.isAuthenticated() ? "/auth/account" : "/auth/login",
+      !this.auth.isAuthenticated() ? {
+        name: "Iniciar sesión",
+        route: "/auth/login",
         type: 'simple',
         visible: true
+      }: {
+        name: "Mi cuenta",
+        route: "",
+        type: 'dropdown',
+        visible: true,
+        children: [
+          {
+            name: 'Perfil',
+            route: "/auth/profile",
+            type: 'simple',
+            visible: true
+          },
+          {
+            name: 'Cerrar sesión',
+            route: "/auth/logout",
+            type: 'simple',
+            visible: true
+          }
+        ]
       }
     ]
 
