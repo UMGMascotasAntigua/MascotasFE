@@ -45,6 +45,12 @@ export class NavbarComponent implements OnInit{
         visible: true
       },
       {
+        name: 'Anuncios',
+        route: '/anuncios',
+        type: 'simple',
+        visible: true
+      },
+      {
         name: 'Mascotas',
         route: '/main/pets',
         type: 'dropdown',
