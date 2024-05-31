@@ -16,7 +16,8 @@ import { UpdateComponent } from './update/update.component';
 import { RegistroComponent } from './registro/registro.component';
 import { ClasificationService } from 'src/app/services/clasification.service';
 import { AnnouncesService } from 'src/app/services/announces.service';
-
+import { FormWizardModule } from 'ngx-form-wizard';
+import { Step1Component } from './adopt/step1.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,7 @@ import { AnnouncesService } from 'src/app/services/announces.service';
     CreateComponent,
     CartComponent,
     UpdateComponent,
-    RegistroComponent
+    RegistroComponent,
   ],
   imports: [
     CommonModule,
@@ -34,7 +35,8 @@ import { AnnouncesService } from 'src/app/services/announces.service';
     HttpClientModule,
     ReactiveFormsModule,
     SweetAlert2Module,
-    FormsModule
+    FormsModule,
+    FormWizardModule
   ],
   providers: [
     PetsService,

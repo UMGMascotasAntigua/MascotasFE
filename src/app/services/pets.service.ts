@@ -27,6 +27,18 @@ export class PetsService {
     .pipe(map(this.extractData<ApiResponse>))
   }
 
+  public adoptPet(user: any, pet: Pet, data:any): Observable<ApiResponse>{
+    return this.http.put<ApiResponse>(`${this.api}adopt`, {
+      User: user,
+      Pet: pet,
+      Address: data.direccion,
+      Phone: data.telefono,
+      Date_Recolection: data.fechaRecoleccion,
+      Comments: data.comentarios
+    })
+    .pipe(map(this.extractData<ApiResponse>))
+  }
+
   public applyVaccine(petCode: number, vaccineCode: number, date: Date):Observable<ApiResponse>{
     return this.http.post<ApiResponse>(`${this.api}vaccines/apply`, {
       pet: Number(petCode),

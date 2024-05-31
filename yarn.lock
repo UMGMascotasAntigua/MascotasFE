@@ -152,7 +152,7 @@
     symbol-observable "4.0.0"
     yargs "17.7.2"
 
-"@angular/common@^14.0.0 || ^15.0.0 || ^16.0.0", "@angular/common@^16.2.0", "@angular/common@>=13.0.0", "@angular/common@>=16.0.0-0", "@angular/common@16.2.8":
+"@angular/common@^14.0.0 || ^15.0.0 || ^16.0.0", "@angular/common@^14.1.0", "@angular/common@^16.2.0", "@angular/common@>=13.0.0", "@angular/common@>=16.0.0-0", "@angular/common@16.2.8":
   version "16.2.8"
   resolved "https://registry.npmjs.org/@angular/common/-/common-16.2.8.tgz"
   integrity sha512-0LZSBHnk9c6XPcrQx9D8i0DKi807IuiuOtK4kMa64aj1pySY3TK+uort5hqpmhgdqiCbBHZjgpRpU83LoTTl3w==
@@ -180,7 +180,7 @@
   dependencies:
     tslib "^2.3.0"
 
-"@angular/core@^14.0.0 || ^15.0.0 || ^16.0.0", "@angular/core@^16.2.0", "@angular/core@>=13.0.0", "@angular/core@>=16.0.0-0", "@angular/core@16.2.8":
+"@angular/core@^14.0.0 || ^15.0.0 || ^16.0.0", "@angular/core@^14.1.0", "@angular/core@^16.2.0", "@angular/core@>=13.0.0", "@angular/core@>=16.0.0-0", "@angular/core@16.2.8":
   version "16.2.8"
   resolved "https://registry.npmjs.org/@angular/core/-/core-16.2.8.tgz"
   integrity sha512-v3kwZsjf7mKBGMky+UfxV3iwA1BFy1c3gmjyHSPSll9TPr2jkfwstoB2Cc+wmS2S9ezHFAMX++XXRymKVRQzQg==
@@ -1565,6 +1565,13 @@
   resolved "https://registry.npmjs.org/@types/jasmine/-/jasmine-4.3.6.tgz"
   integrity sha512-3N0FpQTeiWjm+Oo1WUYWguUS7E6JLceiGTriFrG8k5PU7zRLJCzLcWURU3wjMbZGS//a2/LgjsnO3QxIlwxt9g==
 
+"@types/jquery@^3.5.30":
+  version "3.5.30"
+  resolved "https://registry.npmjs.org/@types/jquery/-/jquery-3.5.30.tgz"
+  integrity sha512-nbWKkkyb919DOUxjmRVk8vwtDb0/k8FKncmUKFi+NY+QXqWltooxTrswvz4LspQwxvLdvzBN1TImr6cw3aQx2A==
+  dependencies:
+    "@types/sizzle" "*"
+
 "@types/json-schema@*", "@types/json-schema@^7.0.8", "@types/json-schema@^7.0.9":
   version "7.0.13"
   resolved "https://registry.npmjs.org/@types/json-schema/-/json-schema-7.0.13.tgz"
@@ -1618,6 +1625,11 @@
     "@types/http-errors" "*"
     "@types/mime" "*"
     "@types/node" "*"
+
+"@types/sizzle@*":
+  version "2.3.8"
+  resolved "https://registry.npmjs.org/@types/sizzle/-/sizzle-2.3.8.tgz"
+  integrity sha512-0vWLNK2D5MT9dg0iOo8GlKguPAU02QjmZitPEsXRuJXU/OGIOt9vT9Fc26wtYuavLxtO45v9PGleoL9Z0k1LHg==
 
 "@types/sockjs@^0.3.33":
   version "0.3.34"
@@ -4499,6 +4511,13 @@ neo-async@^2.6.2:
   version "2.6.2"
   resolved "https://registry.npmjs.org/neo-async/-/neo-async-2.6.2.tgz"
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
+
+ngx-form-wizard@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.npmjs.org/ngx-form-wizard/-/ngx-form-wizard-1.0.1.tgz"
+  integrity sha512-hil6U2f3QmMa5fl3Aa6THu6Frm5HBLjunP6flt1nHNq2dbvkjxwMHsIVf5Z+gf3i/tQPjhK1kftASvEDTuzR7Q==
+  dependencies:
+    tslib "^2.3.0"
 
 ngx-toastr@^17.0.2:
   version "17.0.2"

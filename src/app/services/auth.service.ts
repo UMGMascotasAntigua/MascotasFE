@@ -38,4 +38,9 @@ export class AuthService {
     return this.http.get<ApiResponse>(`${this.api}profile`)
     .pipe(map(this.extractData<ApiResponse>));
   }
+
+  public getUserInfo() : Observable<ApiResponse>{
+    return this.http.get<ApiResponse>(`${this.api}info`)
+    .pipe(map(this.extractData<ApiResponse>));
+  }
 }
