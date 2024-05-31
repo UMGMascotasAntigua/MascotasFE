@@ -3,40 +3,84 @@
 
 
     <div class="container">
-        <form id="editMascotaForm" action="submit_edit_mascota.php" method="post">
+        <form id="editMascotaForm" [formGroup]="updateForm">
             <h2>Editar Mascota</h2>
             <div class="input-group">
                 <label for="codigo_mascota">Código de Mascota:</label>
-                <select id="codigo_mascota" name="codigo_mascota" onchange="cargarDatosMascota(this.value)" required>
-                    <option value="">Seleccione una mascota</option>
+                <select #petSelect (change)="setPetData(petSelect.value)" id="codigo_mascota" name="codigo_mascota" formControlName="pet" required>
+                    <option value="" disabled selected>Seleccione una mascota</option>
+                    <option *ngFor="let mascota of pets" [value]="mascota.Codigo_Mascota">{{mascota.Codigo_Mascota}} - {{mascota.Nombre_Mascota}} / {{mascota.Raza}}</option>
                     <!-- Opciones llenadas dinámicamente desde la base de datos -->
                 </select>
             </div>
-            <div class="input-group">
-                <label for="nombre_mascota">Nombre:</label>
-                <input type="text" id="nombre_mascota" name="nombre_mascota" required>
+            <hr/>
+            <div class="row">
+                <div class="row" *ngIf="updateForm.valid">
+                    <img [src]="photoEndpoint  + this.updateForm.controls['pet'].value">
+                </div>
+                <br/>
+                <hr/>
+    
+                <div class="col">
+                    <div class="input-group">
+                        <label for="nombre_mascota">Nombre:</label>
+                        <input type="text" formControlName="name" id="nombre_mascota" name="nombre_mascota" required>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="input-group">
+                        <label for="raza">Raza:</label>
+                        <input type="text" formControlName="race" id="raza" name="raza" required>
+                    </div>
+                </div>
             </div>
-            <div class="input-group">
-                <label for="raza">Raza:</label>
-                <input type="text" id="raza" name="raza" required>
+            <div class="row">
+                <div class="col">
+                    <div class="input-group">
+                        <label for="edad">Edad:</label>
+                        <input type="text" formControlName="age" id="edad" name="edad" required>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="input-group">
+                        <label for="estado">Estado:</label>
+                        <select formControlName="state" id="state" required>
+                            <option value="Disponible">Disponible</option>
+                            <option value="Adoptado">Adoptado</option>
+                        </select>
+                    </div>
+                </div>
             </div>
+
             <div class="input-group">
-                <label for="edad">Edad:</label>
-                <input type="text" id="edad" name="edad" required>
+                <label for="classification">Clasificación:</label>
+                <select formControlName="clasification" id="classification" required>
+                    <option value="" selected disabled>Seleccione una clasificación</option>
+                    <option *ngFor="let classif of classifications" [value]="classif.Codigo_Clasificacion">{{classif.Descripcion}}</option>
+                </select>
             </div>
-            <div class="input-group">
-                <label for="estado">Estado:</label>
-                <input type="text" id="estado" name="estado" required>
+
+            <div class="row">
+                <div class="input-group">
+                    <label for="foto">Nueva foto (si desea la misma, no cambiar)</label>
+                    <input type="file" id="foto" (change)="onFileSelected($event)" accept="image/*" required>
+                  </div>
             </div>
+
+            <div class="row" *ngIf="imageUrl">
+                <img [src]="imageUrl" alt="Vista previa de la imagen">
+            </div>
+            
+            
             <div class="input-group">
                 <label for="informacion">Información:</label>
-                <textarea id="informacion" name="informacion"></textarea>
+                <textarea formControlName="information" id="informacion" name="informacion"></textarea>
             </div>
             <div class="input-group">
                 <label for="comentarios">Comentarios:</label>
-                <textarea id="comentarios" name="comentarios"></textarea>
+                <textarea formControlName="comments" id="comentarios" name="comentarios"></textarea>
             </div>
-            <button type="submit">Actualizar Mascota</button>
+            <button [disabled]="!updateForm.valid" (click)="saveChanges()">Actualizar Mascota</button>
         </form>
     </div>
 

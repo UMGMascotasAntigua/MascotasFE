@@ -14,6 +14,7 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { AuthService } from './services/auth.service';
 import { registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
+import { CanDeactivateGuard } from './guards/deactivate.guard';
 
 registerLocaleData(localeEs, 'es');
 @NgModule({
@@ -62,7 +63,8 @@ registerLocaleData(localeEs, 'es');
       useClass: HttpReqInterceptor,
       multi: true
     },
-    AuthService
+    AuthService,
+    CanDeactivateGuard
   ],
   bootstrap: [AppComponent]
 })
