@@ -21,7 +21,7 @@ export class PetsService {
   }
 
   public addToFavorites(pet: Pet): Observable<ApiResponse>{
-    return this.http.post<ApiResponse>(`${this.api}favorite`, {
+    return this.http.put<ApiResponse>(`${this.api}favorite`, {
       pet: pet.Codigo_Mascota
     })
     .pipe(map(this.extractData<ApiResponse>))
@@ -65,7 +65,7 @@ export class PetsService {
   }
 
   public filterPets(filters: any[]) : Observable<ApiResponse>{
-    return this.http.post<ApiResponse>(`${this.api}filter`, {
+    return this.http.put<ApiResponse>(`${this.api}filter`, {
       filters: filters
     })
     .pipe(map(this.extractData<ApiResponse>));

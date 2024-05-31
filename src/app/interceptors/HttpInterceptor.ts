@@ -20,8 +20,9 @@ export class HttpReqInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     const token = localStorage.getItem('petsToken') ?? null;
     // const token = localStorage.getItem('shoppaytoken') ?? null;
+    // console.log(token)
     var newReq = null;
-    if(token != null && token.trim() != "" && token.length > 0){
+    if(token != null && token.trim() != "" && token.length > 0 && token != undefined){
         const headers = request.headers
         .set('Authorization', `Bearer ${token}`)
         newReq = request.clone({headers});
