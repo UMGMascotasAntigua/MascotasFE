@@ -15,7 +15,6 @@ import { AuthService } from 'src/app/services/auth.service';
 import { UpdateComponent } from './update/update.component';
 import { RegistroComponent } from './registro/registro.component';
 import { ClasificationService } from 'src/app/services/clasification.service';
-import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { AnnouncesService } from 'src/app/services/announces.service';
 
 
@@ -35,8 +34,7 @@ import { AnnouncesService } from 'src/app/services/announces.service';
     HttpClientModule,
     ReactiveFormsModule,
     SweetAlert2Module,
-    FormsModule,
-    CarouselModule.forRoot()
+    FormsModule
   ],
   providers: [
     PetsService,
