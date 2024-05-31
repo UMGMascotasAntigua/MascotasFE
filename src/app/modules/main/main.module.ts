@@ -15,6 +15,8 @@ import { AuthService } from 'src/app/services/auth.service';
 import { UpdateComponent } from './update/update.component';
 import { RegistroComponent } from './registro/registro.component';
 import { ClasificationService } from 'src/app/services/clasification.service';
+import { CarouselModule } from 'ngx-bootstrap/carousel';
+import { AnnouncesService } from 'src/app/services/announces.service';
 
 
 @NgModule({
@@ -34,11 +36,13 @@ import { ClasificationService } from 'src/app/services/clasification.service';
     ReactiveFormsModule,
     SweetAlert2Module,
     FormsModule,
+    CarouselModule.forRoot()
   ],
   providers: [
     PetsService,
     AuthService,
-    ClasificationService
+    ClasificationService,
+    AnnouncesService
   ]
 })
 export class MainModule { }

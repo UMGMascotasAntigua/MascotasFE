@@ -45,10 +45,10 @@ export class NavbarComponent implements OnInit{
         visible: true
       },
       {
-        name: 'Anuncios',
+        name: 'Crear anuncios',
         route: '/anuncios',
         type: 'simple',
-        visible: true
+        visible: isAdmin
       },
       {
         name: 'Mascotas',

@@ -1,0 +1,15 @@
+.carousel-item {
+    height: 500px; /* Ajusta esta altura según tus necesidades */
+    background-size: cover;
+    background-position: center center;
+  }
+  
+  .carousel-caption {
+    background: rgba(0, 0, 0, 0.5); /* Fondo semitransparente para la legibilidad */
+    padding: 20px;
+    border-radius: 10px;
+  }
+  
+  .carousel-title{
+    color: #fff;
+  }

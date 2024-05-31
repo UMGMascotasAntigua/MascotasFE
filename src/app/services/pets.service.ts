@@ -21,14 +21,14 @@ export class PetsService {
   }
 
   public addToFavorites(pet: Pet): Observable<ApiResponse>{
-    return this.http.patch<ApiResponse>(`${this.api}favorite`, {
+    return this.http.post<ApiResponse>(`${this.api}favorite`, {
       pet: pet.Codigo_Mascota
     })
     .pipe(map(this.extractData<ApiResponse>))
   }
 
   public applyVaccine(petCode: number, vaccineCode: number, date: Date):Observable<ApiResponse>{
-    return this.http.patch<ApiResponse>(`${this.api}vaccines/apply`, {
+    return this.http.post<ApiResponse>(`${this.api}vaccines/apply`, {
       pet: Number(petCode),
       vaccine: Number(vaccineCode),
       date: date
@@ -37,7 +37,7 @@ export class PetsService {
   }
 
   public addCastration(petCode: number, comments: string, date: Date) : Observable<ApiResponse>{
-    return this.http.patch<ApiResponse>(`${this.api}castration/add`, {
+    return this.http.post<ApiResponse>(`${this.api}castration/add`, {
       pet: Number(petCode),
       comments: comments,
       date: date
@@ -94,7 +94,7 @@ export class PetsService {
   }
 
   public updatePet(id: number, update: object):  Observable<ApiResponse>{
-    return this.http.patch<ApiResponse>(`${this.api}${id}`, update)
+    return this.http.post<ApiResponse>(`${this.api}${id}`, update)
     .pipe(map(this.extractData<ApiResponse>));
   }
 }

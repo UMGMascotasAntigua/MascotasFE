@@ -34,7 +34,7 @@ input[type="file"] {
 
 button {
     padding: 10px 20px;
-    background-color: #f0f0f0;
+    background-color: #32cd32 ;
     border: none;
     cursor: pointer;
     font-size: 16px;
@@ -43,4 +43,76 @@ button {
 
 button:hover {
     background-color: #e0e0e0;
+}
+
+
+button:disabled{
+    background-color: #f0f0f0;
+}
+
+.container {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+  }
+  
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .input-group {
+    margin-bottom: 15px;
+  }
+  
+  .input-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  .input-group input,
+  .input-group textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 16px;
+  }
+  
+  .input-group input[type="file"] {
+    padding: 3px;
+  }
+  
+  button {
+    width: 100%;
+    padding: 10px;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  button:hover {
+    background-color: #218838;
+  }
+  
+
+  .input-group input[type="date"],
+.input-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fafafa;
+    -webkit-appearance: none; /* Removes default styling of select in WebKit browsers */
+    -moz-appearance: none;    /* Removes default styling of select in Firefox */
 }

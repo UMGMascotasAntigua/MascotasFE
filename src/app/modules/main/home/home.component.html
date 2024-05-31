@@ -3,9 +3,9 @@
   <div class="container py-5">
       <div class="row justify-content-start">
           <div class="col-lg-8 text-center text-lg-start">
-              <h1 class="font-secondary text-primary mb-4">¿Estás buscando una adorable compañía?</h1>
-              <h1 class="display-1 text-uppercase text-white mb-4">ESTÁS EN EL LUGAR CORRECTO</h1>
-              <h2 class="text-uppercase text-white">Donde Puedes Encontrar Tu Proxima Compañía Tierna</h2>
+              <h1 class="font-secondary text-primary mb-4">¿Está buscando una adorable compañía?</h1>
+              <h1 class="display-1 text-uppercase text-white mb-4">ESTÁ EN EL LUGAR CORRECTO</h1>
+              <h2 class="text-uppercase text-white">Donde Puede Encontrar Una Tierna Compañía </h2>
           </div>
       </div>
   </div>
@@ -69,8 +69,8 @@
 <div class="container-fluid about py-5">
     <div class="container">
         <div class="section-title position-relative text-center mx-auto mb-5 pb-3" style="max-width: 600px;">
-            <h1 class="text-primary font-secondary">Conoce a tu nuevo amigo</h1>
-            <h2 class="display-4 text-uppercase">Explora nuestras mascotas disponibles para adopción</h2>
+            <h1 class="text-primary font-secondary">Conozca a su nuevo amigo</h1>
+            <h2 class="display-4 text-uppercase">Explore nuestras mascotas disponibles para adopción</h2>
         </div>
         <div class="tab-class text-center">
             <ul class="nav nav-pills d-inline-flex justify-content-center bg-dark text-uppercase border-inner p-4 mb-5">
@@ -86,7 +86,7 @@
             </ul>
             <div class="tab-content">
                 <div id="tab-1" class="tab-pane fade show p-0 active">
-                    <p>Explora el catálogo de los Perros disponibles que buscan hogar</p>
+                    <p>Explore el catálogo de los Perros disponibles que buscan hogar</p>
                     <img src="../assets/img/cachorro.jpg" alt="cargando" width="150" height="150">
                     <div class="row g-3">
                         <div class="col-lg-6">
@@ -99,11 +99,11 @@
                     </div>
                 </div>
                 <div id="tab-2" class="tab-pane fade show p-0">
-                    <p>Explora el catálogo de los Gatos disponibles que buscan hogar</p>
+                    <p>Explore el catálogo de los Gatos disponibles que buscan hogar</p>
                     <img src="../assets/img/gatitos.jpg" alt="." width="150" height="150">
                 </div>
                 <div id="tab-3" class="tab-pane fade show p-0">
-                    <p>Explora el catálogo de otras mascotas disponibles que buscan hogar</p>
+                    <p>Explore el catálogo de otras mascotas disponibles que buscan hogar</p>
                     <img src="../assets/img/pajero.jpg" alt="." width="150" height="150">
                 </div>
             </div>
@@ -118,7 +118,7 @@
         <div class="row g-5">
            <div class="bg-primary border-inner text-center text-white p-5">
                     <!--<div class="col-lg-4 col-md-6">-->
-                    <h2 class="text-secundary font-secondary">Conoce Nustras Jornadas de Castracion</h2>
+                    <h2 class="text-secundary font-secondary">Conozca Nustras Jornadas de Castracion</h2>
                     <p>Las Jornadas se Realizan 2 veces por mes, en donde podras inscribirte para poder agendar uan citar para tu Compañero Peludo</p>
                     <img src="../assets/img/Castracion-perros-y-gatos-885x500.jpg" alt="." width="350" height="300">
 
@@ -128,7 +128,7 @@
                                 <!--<div class="bg-primary border-inner text-center text-white p-5">
                                         <!--<div class="col-lg-4 col-md-6">-->
                                             <div class="text-center mt-15">
-                                            <a href="" class="btn btn-primary border-inner py-3 px-5 me-5">Consultar</a>
+                                            <!-- <a href="" class="btn btn-primary border-inner py-3 px-5 me-5">Consultar</a> -->
                                         </div>
                 </div>
             </div>
@@ -143,8 +143,41 @@
                                 <!--<div class="bg-primary border-inner text-center text-white p-5">
                                         <!--<div class="col-lg-4 col-md-6">-->
                                             <div class="text-center mt-15">
-                                            <a href="" class="btn btn-primary border-inner py-3 px-5 me-5">Consultar</a>
+                                            <!-- <a href="" class="btn btn-primary border-inner py-3 px-5 me-5">Consultar</a> -->
                                         </div>
+                </div>
+            </div>
+
+            <hr>
+            <div class="row">
+                <h1 class="font-secondary" style="color: black;">- Anuncios - </h1>
+                <div class="container">
+                    <div *ngIf="announces.length > 0" id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-indicators">
+                          <button type="button" *ngFor="let anuncio of announces; let i = index" data-bs-target="#carouselExampleIndicators" 
+                            [attr.data-bs-slide-to]="i" [class.active]="i === 0" aria-current="i === 0 ? 'true' : undefined"></button>
+                        </div>
+                        <div class="carousel-inner">
+                          <div *ngFor="let anuncio of announces; let i = index" class="carousel-item" [class.active]="i === 0" 
+                            [ngStyle]="{'background-image': 'url(' + photoEndpoint + anuncio.Codigo_Anuncio + ')'}">
+                            <div class="carousel-caption d-none d-md-block">
+                              <h5 class="carousel-title">{{ anuncio.Titulo }}</h5>
+                              <p>{{ anuncio.Descripcion }}</p>
+                              <p><small>{{ anuncio.Fecha_Evento | date:'dd MMMM yyyy':'es' }}</small></p>
+                              <a [href]="anuncio" class="btn btn-primary">Ver más detalles</a>
+                            </div>
+                          </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                          <span class="visually-hidden">Anterior</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                          <span class="visually-hidden">Siguiente</span>
+                        </button>
+                      </div>
+                      
                 </div>
             </div>
 

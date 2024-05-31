@@ -61,8 +61,7 @@ export class MenuComponent implements OnInit{
   }
 
   addToFavorites(pet: Pet){
-    if(this.auth.isAuthenticated()){
-      this.petsService.addToFavorites(pet)
+    this.petsService.addToFavorites(pet)
       .subscribe((e) => {
         if(e.success == true){
           this.toastr.success(e.message ?? "Mascota agregada a favoritos", "Favoritos", {
@@ -70,20 +69,9 @@ export class MenuComponent implements OnInit{
           })
         }
       });
-    }else{
-      Swal.fire({
-        titleText: "Necesita un usuario para hacer esto",
-        text: "Para agregar a favoritos o adoptar, requiere tener una cuenta de usuario",
-        confirmButtonText: 'Cerrar',
-        footer: "Su experiencia será más completa al obtener un usuario.",
-        icon: 'info'
-      })
-    }
-    
   }
 
   toggleFavorite(mascota: any): void {
-    const val = mascota.isFavorite;
     mascota.isFavorite = !mascota.isFavorite;
     this.addToFavorites(mascota);
     // if(mascota.isFavorite == false){
